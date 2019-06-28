@@ -1,5 +1,8 @@
+
 .App {
   text-align: center;
+  /* background-color: #333;
+  color: #333; */
 }
 
 .App-logo {
@@ -21,6 +24,7 @@
 
 .App-link {
   color: #61dafb;
+  display: none;
 }
 
 @keyframes App-logo-spin {
@@ -30,4 +34,17 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+div, button {
+  margin: 15px;
+  padding: 10px;
+}
+
+hr {
+  margin-top: 15px;
+}
+
+body {
+  background: #333 !important;
 }

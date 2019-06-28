@@ -1,26 +1,20 @@
-import React, { Component } from 'react';
 import './App.css';
+import React, { Component } from 'react';
 import Spotify from 'spotify-web-api-js'
-// ======================================
+// =====================================
+import MainContainer from './Containers/MainContainer'
 import MediaControlCard from './Components/MediaControlCard'
 import NowPlayingSwitch from './Components/NowPlayingSwitch'
-import MainContainer from './Containers/MainContainer'
-//=======================================
-import IconButton from '@material-ui/core/IconButton';
-import TextField from '@material-ui/core/TextField';
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
-import Divider from '@material-ui/core/Divider';
-import Switch from '@material-ui/core/Switch';
-import { Slider } from 'material-ui-slider';
+import PlaybackBar from './Components/PlaybackBar'
 // ======================================
-import { Grid, Button, Form } from 'semantic-ui-react'
+import { Slider } from 'material-ui-slider';
+import { Grid, Button, Form, Input } from 'semantic-ui-react'
 // ======================================
 
 
 const spotifyWebApi = new Spotify()
 
-class App extends Component {
+class App2 extends Component {
 
   constructor() {
     super()
@@ -60,7 +54,8 @@ class App extends Component {
         nowPlayingArtist: res.item.artists[0].name,
         nowPlayingImage: res.item.album.images[0].url,
         nowPlayingAlbumReleaseYear: res.item.album.release_date.slice(0, 4),
-        nowPlayingAlbumName: res.item.album.name
+        nowPlayingAlbumName: res.item.album.name,
+        nowPlayingChecked: !this.state.nowPlayingChecked
       })
     })
   }
@@ -89,36 +84,44 @@ class App extends Component {
     console.log(this.state.nowPlayingChecked);
   }
 
+
   render() {
     console.log(this.state.searchResults)
     return (
       <div className="App">
-        <Button variant="contained" href='http://localhost:8888'>
-          Connect to Spotify
-        </Button>
-        <br />
-        <hr />
-        <div>
-          <InputBase id="outlined-name" variant="outlined" type='text' placeholder="Search Artists..." value={this.state.query} onChange={this.searchArtists} />
-            <IconButton aria-label="Search" onClick={this.railsFetch}>
-              <SearchIcon />
-            </IconButton>
+      <a href='http://localhost:8888/'>
+      <Button color='green'>
+      Connect to Spotify
+      </Button>
+      </a>
+      <br />
       <hr />
-        <NowPlayingSwitch onClick={this.showPlaying} nowPlayingChecked={this.state.nowPlayingChecked} />
-        </div>
-        {
-          this.state.nowPlayingArtist.length > 0 ?
-          <MediaControlCard nowPlayingArtist={this.state.nowPlayingArtist} nowPlayingName={this.state.nowPlayingName} nowPlayingImage={this.state.nowPlayingImage} />
-          :
-          ""
-        }
-        <button onClick={this.getNowPlaying}>Check Now Playing</button>
-        <button onClick={this.railsFetch}>Fetch Rails</button>
-        <MainContainer searchResults={this.state.searchResults} nowPlayingArtist={this.state.nowPlayingArtist} nowPlayingName={this.state.nowPlayingName} nowPlayingImage={this.state.nowPlayingImage}  />
+      <div>
+      <div class="ui icon input">
+      <Input icon='search' iconPosition='right' type='text' placeholder="Search Artists..." value={this.state.query} onChange={this.searchArtists} />
+      </div>
 
+      <hr />
+
+      </div>
+      {
+        this.state.nowPlayingArtist.length > 0 && this.state.nowPlayingChecked === false ?
+        <MediaControlCard nowPlayingArtist={this.state.nowPlayingArtist} nowPlayingName={this.state.nowPlayingName} nowPlayingImage={this.state.nowPlayingImage} />
+        :
+        ""
+      }
+      {
+        this.state.nowPlayingChecked ?
+        <Button inverted color='green' onClick={this.getNowPlaying}>What's Playing?</Button>
+        :
+        <Button color='green' onClick={this.getNowPlaying}>What's Playing?</Button>
+      }
+      <MainContainer searchResults={this.state.searchResults} nowPlayingArtist={this.state.nowPlayingArtist} nowPlayingName={this.state.nowPlayingName} nowPlayingImage={this.state.nowPlayingImage}  />
+      <PlaybackBar nowPlayingImage={this.state.nowPlayingImage} nowPlayingArtist={this.state.nowPlayingArtist} nowPlayingName={this.state.nowPlayingName} />
       </div>
     );
   }
 }
 
-export default App;
+
+export default App2;
