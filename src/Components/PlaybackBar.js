@@ -1,5 +1,6 @@
 import React from 'react'
 import { Menu } from 'semantic-ui-react'
+import MediaControlCard from './MediaControlCard'
 // ======================================
 
 class PlaybackBar extends React.Component {
@@ -13,6 +14,10 @@ class PlaybackBar extends React.Component {
         </div>
         <a class="item">{this.props.nowPlayingArtist}</a>
         <a class="item">{this.props.nowPlayingName}</a>
+
+          <a class='right item' href='https://github.com/tpr1992' icon='inverted github icon'>Github
+          <i class="inverted github icon" />
+          </a>
       </div>
     </div>
     )

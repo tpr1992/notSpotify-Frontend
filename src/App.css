@@ -1,14 +1,6 @@
 
 .App {
   text-align: center;
-  /* background-color: #333;
-  color: #333; */
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
 }
 
 .App-header {
@@ -20,10 +12,12 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  margin: 0px;
+  padding: 0px;
 }
 
 .App-link {
-  color: #61dafb;
+  /* color: #61dafb; */
   display: none;
 }
 
@@ -37,14 +31,121 @@
 }
 
 div, button {
-  margin: 15px;
-  padding: 10px;
+  margin: .8vh;
+  padding: 1vh;
 }
 
 hr {
-  margin-top: 15px;
+  margin-top: .8vh;
 }
 
 body {
-  background: #333 !important;
+  /* background: #333 !important; */
 }
+
+
+.github-icon {
+  /* margin-top: 10px; */
+  padding-top: .5vh;
+  padding-bottom: .5vh;
+  display: inline-flex;
+  /* margin: auto; */
+  /* width: auto; */
+  margin-left: 25em;
+  margin-top: 2vh;
+  /* justify-content: center; */
+}
+
+.ui.menu {
+  font-size: 1.1rem;
+}
+
+.ui.button {
+  /* padding: 1.5vh !important; */
+  /* font-family: Architects Daughter !important; */
+}
+
+.ui.card {
+  justify-content: center !important;
+  padding: 1vh !important;
+  /* width: 100vh !important; */
+  margin: auto !important;
+  margin-bottom: 5vh !important;
+}
+
+
+
+#header-text {
+  display: center;
+  font-size: 5em;
+  color: #282c34;
+  font-family: Architects Daughter;
+  padding: 2vh;
+  width: 100%;
+  margin-bottom: 4vh;
+  color: white;
+  text-shadow:
+  2px 2px 0 #000,
+  -1px -1px 0 #000,
+  1px -1px 0 #000,
+  -1px 1px 0 #000,
+  1px 1px 0 #000;
+}
+
+#logo-header {
+  padding: 5px;
+  color: black;
+  outline-color: black;
+}
+
+
+.box{
+  align-items: center;
+  display: inline-flex;
+  justify-content: flex-end;
+  margin:25px;
+  width:150px;
+  height:50px;
+  /* background:#fff; */
+  border: solid black;
+  border-color: black;
+  float:center;
+}
+
+.box2{
+  width:300px;
+  border-width: .5px .8px 1.8px 2px;
+  border-radius:4% 95% 4% 95%/95% 4% 92% 5%;
+  transform: rotate(-2deg);
+}
+.evenboxinner{
+  transform: rotate(-1deg);
+  margin:1px;
+  margin-bottom: 1px;
+  padding:0.2 10px;
+  font-family: Architects Daughter;
+  font-size: 1.3em;
+  letter-spacing: .15em;
+  font-weight: 200;
+  float:centered;
+}
+
+#custom-search {
+  /* display-style: none; */
+  border: none;
+  width: 276px;
+  height: 50px;
+  letter-spacing: .1em;
+  margin: -17px;
+  padding-left: 5vh;
+  font-size: 1.3em;
+  background: none;
+  display: flex;
+  justify-content: space-between;
+  font-family: Architects Daughter;
+  styles: none;
+  outline: none;
+}
+
+
+/* =============================================================== */

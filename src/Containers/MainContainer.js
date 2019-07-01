@@ -11,7 +11,6 @@ class MainContainer extends React.Component {
     console.log('Search Results', this.props.searchResults.length);
     if (this.props.searchResults.length > 0) {
       this.props.searchResults.map(artist => {
-        console.log('kjkjlkj');
         return <SearchResults key={artist} artist={artist} />
       })
     }
