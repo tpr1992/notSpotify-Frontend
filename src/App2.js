@@ -31,6 +31,7 @@ class App2 extends Component {
       loading: true,
       loggedIn: null,
       showUser: false,
+      userPlaylists: [],
 
       currentUser: '',
       trackPlaying: false,
@@ -40,7 +41,8 @@ class App2 extends Component {
     }
 
     componentDidMount() {
-      setTimeout(this.handleLoader, 1500)
+      // setTimeout(this.handleLoader, 1500)
+      this.getPlaylists()
     }
 
   handleLoader = () => {
@@ -78,7 +80,10 @@ class App2 extends Component {
     fetch('http://localhost:3001/api/v2/get_playlists')
     .then(res => res.json())
     .then(data => {
-      console.log(data);
+      this.setState({
+        userPlaylists: data,
+        searchResults: []
+      }, () => this.handleLoader())
     })
   }
 
@@ -130,7 +135,8 @@ class App2 extends Component {
   }
 
   //  Searching spotify db for ONLY tracks
-  searchTracks = () => {
+  searchTracks = (event) => {
+    event.preventDefault()
     this.setState({
       loading: true
     })
@@ -174,12 +180,14 @@ class App2 extends Component {
         <div id='custom-search-box'>
           <div class='box box2'>
             <div class='evenboxinner'>
-              <Input icon='search' type='text' id='custom-search' value={this.state.query} placeholder='Search...' onChange={this.captureSearch} />
+              <form onSubmit={this.searchTracks} >
+                <Input icon='search' type='text' id='custom-search' value={this.state.query} placeholder='Search...' onChange={this.captureSearch} />
+              </form>
             </div>
           </div>
 
           <Button color='green' onClick={this.searchTracks}>Submit</Button>
-          <Button color='green' onClick={this.getPlaylists}>Get playlists</Button>
+          <Button color='green' onClick={this.getPlaylists}>My playlists</Button>
         </div>
         {
           this.state.loading ?
@@ -187,7 +195,7 @@ class App2 extends Component {
           :
           null
         }
-        <MainContainer selectTrack={this.selectTrack} searchResults={this.state.searchResults} nowPlayingArtist={this.state.nowPlayingArtist} nowPlayingName={this.state.nowPlayingName} nowPlayingImage={this.state.nowPlayingImage}  />
+        <MainContainer userPlaylists={this.state.userPlaylists} selectTrack={this.selectTrack} searchResults={this.state.searchResults} nowPlayingArtist={this.state.nowPlayingArtist} nowPlayingName={this.state.nowPlayingName} nowPlayingImage={this.state.nowPlayingImage}  />
         <PlaybackBar handleLoader={this.handleLoader} selectedTrack={this.state.selectedTrack} nowPlayingImage={this.state.track.image} nowPlayingArtist={this.state.track.artist} nowPlayingName={this.state.track.name} trackPlaying={this.state.trackPlaying} />
       </div>
     )

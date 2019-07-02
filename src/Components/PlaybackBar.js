@@ -20,16 +20,14 @@ class PlaybackBar extends React.Component {
               <a class="item">{this.props.nowPlayingName}</a>
             </Fragment>
             :
-            <Fragment>
-              null
-            </Fragment>
+            <Fragment />
           }
           <div class='right item' style={{display: 'flex'}}>
             {
               this.props.selectedTrack != "" ?
               <iframe src={this.props.selectedTrack} width="500" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
               :
-              null
+              <Fragment />
             }
           </div>
           <a class='right item' href='https://github.com/tpr1992' icon='inverted github icon'>Github
