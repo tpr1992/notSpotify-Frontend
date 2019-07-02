@@ -6,14 +6,6 @@ import MediaControlCard from '../Components/MediaControlCard';
 
 class MainContainer extends React.Component {
 
-  mapSearchResults = () => {
-    console.log('Search Results', this.props.searchResults.length);
-    if (this.props.searchResults.length > 0) {
-      this.props.searchResults.map(artist => {
-        return <SearchResults key={artist} artist={artist} />
-      })
-    }
-  }
   render () {
     console.log(this.props)
     return (
@@ -25,7 +17,7 @@ class MainContainer extends React.Component {
               return  <Grid.Column> {<SearchResults selectTrack={this.props.selectTrack} result={result} key={result.id} />} </Grid.Column>
             })
             :
-            ""
+            null
           }
         </Grid.Row>
       </Grid>

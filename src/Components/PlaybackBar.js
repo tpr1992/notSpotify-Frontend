@@ -6,7 +6,6 @@ import MediaControlCard from './MediaControlCard';
 
 class PlaybackBar extends React.Component {
 
-
   render () {
     return (
       <div class="playback-bar">
@@ -22,7 +21,7 @@ class PlaybackBar extends React.Component {
             </Fragment>
             :
             <Fragment>
-              ""
+              null
             </Fragment>
           }
           <div class='right item' style={{display: 'flex'}}>
@@ -30,7 +29,7 @@ class PlaybackBar extends React.Component {
               this.props.selectedTrack != "" ?
               <iframe src={this.props.selectedTrack} width="500" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
               :
-              <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DWWISLnAIWyCZ" width="500" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+              null
             }
           </div>
           <a class='right item' href='https://github.com/tpr1992' icon='inverted github icon'>Github

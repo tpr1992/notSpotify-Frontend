@@ -29,6 +29,8 @@ class App2 extends Component {
       query: '',
       nowPlayingChecked: false,
       loading: true,
+      loggedIn: null,
+      showUser: false,
 
       currentUser: '',
       trackPlaying: false,
@@ -66,8 +68,17 @@ class App2 extends Component {
     .then(data => {
       this.setState({
         currentUser: data,
-        loggedIn: true
+        loggedIn: true,
+        showUser: !this.state.showUser
       })
+    })
+  }
+
+  getPlaylists = () => {
+    fetch('http://localhost:3001/api/v2/get_playlists')
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
     })
   }
 
@@ -152,7 +163,7 @@ class App2 extends Component {
         </span>
         <SpotifyAuth setUser={this.setUser} />
         {
-          this.state.loggedIn ?
+          this.state.loggedIn && this.state.showUser ?
           <UserCard currentUser={this.state.currentUser[0]} />
           :
           null
@@ -167,7 +178,8 @@ class App2 extends Component {
             </div>
           </div>
 
-          <Button color='green' onClick={this.searchTracks}>Click me</Button>
+          <Button color='green' onClick={this.searchTracks}>Submit</Button>
+          <Button color='green' onClick={this.getPlaylists}>Get playlists</Button>
         </div>
         {
           this.state.loading ?
