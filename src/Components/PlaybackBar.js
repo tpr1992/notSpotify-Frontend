@@ -1,10 +1,11 @@
-import React from 'react'
-import { Fragment } from 'react'
-import { Menu } from 'semantic-ui-react'
-import MediaControlCard from './MediaControlCard'
+import React from 'react';
+import { Fragment } from 'react';
+import { Menu } from 'semantic-ui-react';
+import MediaControlCard from './MediaControlCard';
 // ======================================
 
 class PlaybackBar extends React.Component {
+
 
   render () {
     return (

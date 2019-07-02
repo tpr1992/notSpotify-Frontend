@@ -1,27 +1,24 @@
 import './App.css';
-import React, { Component } from 'react'
-import Spotify from 'spotify-web-api-js'
+import React, { Component } from 'react';
+import Spotify from 'spotify-web-api-js';
 // =====================================
-import UserCard from './Components/UserCard'
-import PlaybackBar from './Components/PlaybackBar'
-import MusicControls from './Components/MusicControls'
-import MainContainer from './Containers/MainContainer'
-import MediaControlCard from './Components/MediaControlCard'
-import NowPlayingSwitch from './Components/NowPlayingSwitch'
+import UserCard from './Components/UserCard';
+import PlaybackBar from './Components/PlaybackBar';
+import SpotifyAuth from './Components/SpotifyAuth';
+import MusicControls from './Components/MusicControls';
+import MainContainer from './Containers/MainContainer';
+import MediaControlCard from './Components/MediaControlCard';
+import NowPlayingSwitch from './Components/NowPlayingSwitch';
 // ======================================
-import { Grid, Button, Form, Input, Segment, Menu } from 'semantic-ui-react'
+import { Grid, Button, Form, Input, Segment, Menu } from 'semantic-ui-react';
 // ======================================
 
-
+//  Might delete, this is using older API
 const spotifyWebApi = new Spotify()
 
 class App2 extends Component {
 
-  constructor() {
-    super()
-    const params = this.getHashParams()
-    this.state = {
-      loggedIn: params.access_token ? true : false,
+    state = {
       nowPlayingName: '',
       nowPlayingArtist: '',
       nowPlayingImage: '',
@@ -31,6 +28,7 @@ class App2 extends Component {
       searchResults: [],
       query: '',
       nowPlayingChecked: false,
+      loading: true,
 
       currentUser: '',
       trackPlaying: false,
@@ -38,19 +36,31 @@ class App2 extends Component {
       track: '',
       selectedTrack: ''
     }
-    if (params.access_token) {
-      spotifyWebApi.setAccessToken(params.access_token)
+
+    componentDidMount() {
+      setTimeout(this.handleLoader, 1500)
     }
+
+  handleLoader = () => {
+    this.setState({
+      loading: false
+    })
+  }
+  handleLoader2 = () => {
+    this.setState({
+      loading: false
+    })
   }
 
+  // Get search input
   captureSearch = (event) => {
     this.setState({
       query: event.target.value
-    }, () => console.log(this.state.query))
+    })
   }
 
+  //  Set user, fetching from spotify auth to set values
   setUser = () => {
-    console.log('Setting user');
     fetch('http://localhost:3001/api/v2/users')
     .then(res => res.json())
     .then(data => {
@@ -61,8 +71,8 @@ class App2 extends Component {
     })
   }
 
+  //  Setting currently playing in playback bar and in custom controls
   getCurrentlyPlayingInfo = () => {
-    console.log('now playing:');
     fetch('http://localhost:3001/api/v2/tracks/get_currently_playing')
     .then(res => res.json())
     .then(data => {
@@ -72,6 +82,7 @@ class App2 extends Component {
     })
   }
 
+  //  ** Custom controls - Play song
   playTrack = () => {
     fetch('http://localhost:3001/api/v2/tracks/play_track')
     .then(this.setState({
@@ -80,6 +91,7 @@ class App2 extends Component {
     }, () => this.getCurrentlyPlayingInfo())
   )}
 
+  //  **Custom controls - Pause song
   pauseTrack = () => {
     fetch('http://localhost:3001/api/v2/tracks/pause_track')
     .then(this.setState({
@@ -87,23 +99,30 @@ class App2 extends Component {
     })
   )}
 
+  //  **Custom controls - Next song
   nextTrack = () => {
     fetch('http://localhost:3001/api/v2/tracks/next_track')
     .then(this.getCurrentlyPlayingInfo)
   }
 
+  //  **Custom controls - Previous song
   prevTrack = () => {
     fetch('http://localhost:3001/api/v2/tracks/prev_track')
     .then(this.getCurrentlyPlayingInfo)
   }
 
+  //  Grab link from track info in api, change embeded player source to selected track
   selectTrack = (link) => {
     this.setState({
       selectedTrack: link.split('com').join('com/embed')
     })
   }
 
+  //  Searching spotify db for ONLY tracks
   searchTracks = () => {
+    this.setState({
+      loading: true
+    })
     fetch('http://localhost:3001/api/v2/search_tracks', {
       method: 'POST',
       headers: {
@@ -118,47 +137,48 @@ class App2 extends Component {
     .then(results => {
       this.setState({
         searchResults: results
-      })
+      }, () => this.setState({
+        loading: false
+      }))
     })
   }
 
   render() {
     console.log(this.state)
     return (
-      <div className="App">
-        <span id="logo-header">
-          <h1 id='header-text'>notSpotify();<i class="spotify icon"/></h1>
+      <div className='App'>
+        <span id='logo-header'>
+          <h1 id='header-text'>notSpotify();<i class='spotify icon'/></h1>
         </span>
-
-        CONNECT TO SPOTIFY BUTTON GOES HERE
+        <SpotifyAuth setUser={this.setUser} />
         {
           this.state.loggedIn ?
           <UserCard currentUser={this.state.currentUser[0]} />
           :
-          ""
+          null
         }
         <br />
         <hr />
-        <div>
-          <div class="box box2">
-            <div class="evenboxinner">
-              <Input icon='search' type="text" id="custom-search" value={this.state.query} placeholder="Search..." onChange={this.captureSearch} />
+
+        <div id='custom-search-box'>
+          <div class='box box2'>
+            <div class='evenboxinner'>
+              <Input icon='search' type='text' id='custom-search' value={this.state.query} placeholder='Search...' onChange={this.captureSearch} />
             </div>
           </div>
+
           <Button color='green' onClick={this.searchTracks}>Click me</Button>
-          <hr />
         </div>
         {
-          this.state.nowPlayingArtist.length > 0 && this.state.nowPlayingChecked === false ?
-          <MediaControlCard nowPlayingArtist={this.state.nowPlayingArtist} nowPlayingName={this.state.nowPlayingName} nowPlayingImage={this.state.nowPlayingImage} />
+          this.state.loading ?
+          <div style={{marginTop: 40, marginRight: 10, padding: 15}} class="ui active inline loader"></div>
           :
-          ""
+          null
         }
-        <MediaControlCard currentlyPlayingArtist={this.state.track.artist} currentlyPlayingTrack={this.state.track.name} currentlyPlayingImage={this.state.track.image} trackPlaying={this.state.trackPlaying} playTrack={this.playTrack} pauseTrack={this.pauseTrack} nextTrack={this.nextTrack} prevTrack={this.prevTrack} />
         <MainContainer selectTrack={this.selectTrack} searchResults={this.state.searchResults} nowPlayingArtist={this.state.nowPlayingArtist} nowPlayingName={this.state.nowPlayingName} nowPlayingImage={this.state.nowPlayingImage}  />
-        <PlaybackBar selectedTrack={this.state.selectedTrack} nowPlayingImage={this.state.track.image} nowPlayingArtist={this.state.track.artist} nowPlayingName={this.state.track.name} trackPlaying={this.state.trackPlaying} />
+        <PlaybackBar handleLoader={this.handleLoader} selectedTrack={this.state.selectedTrack} nowPlayingImage={this.state.track.image} nowPlayingArtist={this.state.track.artist} nowPlayingName={this.state.track.name} trackPlaying={this.state.trackPlaying} />
       </div>
-    );
+    )
   }
 }
 

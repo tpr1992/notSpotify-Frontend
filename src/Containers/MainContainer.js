@@ -1,8 +1,8 @@
-import React from 'react'
-import SearchResults from '../Components/SearchResults'
-import MediaControlCard from '../Components/MediaControlCard'
-import StackGrid from "react-stack-grid";
-import { Grid } from 'semantic-ui-react'
+import React from 'react';
+import { Grid } from 'semantic-ui-react';
+import StackGrid from 'react-stack-grid';
+import SearchResults from '../Components/SearchResults';
+import MediaControlCard from '../Components/MediaControlCard';
 
 class MainContainer extends React.Component {
 
@@ -22,7 +22,7 @@ class MainContainer extends React.Component {
           {
             this.props.searchResults ?
             this.props.searchResults.map(result => {
-              return  <Grid.Column onClick={() => this.props.selectTrack(result.external_urls.spotify)}> {<SearchResults result={result} key={result.id} />} </Grid.Column>
+              return  <Grid.Column> {<SearchResults selectTrack={this.props.selectTrack} result={result} key={result.id} />} </Grid.Column>
             })
             :
             ""
