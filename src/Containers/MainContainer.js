@@ -6,7 +6,6 @@ import { Grid } from 'semantic-ui-react'
 
 class MainContainer extends React.Component {
 
-
   mapSearchResults = () => {
     console.log('Search Results', this.props.searchResults.length);
     if (this.props.searchResults.length > 0) {
@@ -15,23 +14,20 @@ class MainContainer extends React.Component {
       })
     }
   }
-
   render () {
     console.log(this.props)
     return (
       <Grid centered>
-      <Grid.Row columns={5}>
-
-      {
-        this.props.searchResults ?
-        this.props.searchResults.map(result => {
-          return  <Grid.Column> <SearchResults result={result} key={result.id} /> </Grid.Column>
-        })
-        :
-        ""
-      }
-
-      </Grid.Row>
+        <Grid.Row columns={5}>
+          {
+            this.props.searchResults ?
+            this.props.searchResults.map(result => {
+              return  <Grid.Column onClick={() => this.props.selectTrack(result.external_urls.spotify)}> {<SearchResults result={result} key={result.id} />} </Grid.Column>
+            })
+            :
+            ""
+          }
+        </Grid.Row>
       </Grid>
     )
   }

@@ -1,6 +1,7 @@
 
 .App {
   text-align: center;
+
 }
 
 .App-header {
@@ -68,9 +69,11 @@ body {
 .ui.card {
   justify-content: center !important;
   padding: 1vh !important;
-  /* width: 100vh !important; */
+  width: 100vh !important;
   margin: auto !important;
   margin-bottom: 5vh !important;
+  box-shadow: 5px 3px 7px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important;
+  max-height: 85%;
 }
 
 
@@ -90,12 +93,14 @@ body {
   1px -1px 0 #000,
   -1px 1px 0 #000,
   1px 1px 0 #000;
+  opacity: .75;
 }
 
 #logo-header {
   padding: 5px;
   color: black;
   outline-color: black;
+  opacity: .75;
 }
 
 
@@ -131,21 +136,47 @@ body {
 }
 
 #custom-search {
-  /* display-style: none; */
   border: none;
   width: 276px;
   height: 50px;
-  letter-spacing: .1em;
-  margin: -17px;
-  padding-left: 5vh;
-  font-size: 1.3em;
+  letter-spacing: .09em;
+  margin: -13px;
+  padding-left: 3vh;
+  font-size: 1.15em;
   background: none;
   display: flex;
   justify-content: space-between;
-  font-family: Architects Daughter;
+  /* font-family: Architects Daughter; */
+  font-family: Helvetica Neue Light;
+  font-weight: 200;
   styles: none;
   outline: none;
+  opacity: .95;
+}
+
+.ui.icon.input>i.icon {
+  opacity: .4 !important;
+  position: fixed !important;
+}
+
+.search-result-header {
+  font-size: 1.22em;
+  font-weight: bolder;
+}
+
+iframe[Attributes Style] {
+  display: flex !important;
 }
 
 
 /* =============================================================== */
+
+/* .ui.card {
+justify-content: center !important;
+padding: 1vh !important;
+width: 100vh !important;
+margin: auto !important;
+margin-bottom: 5vh !important;
+box-shadow: 5px 3px 7px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important;
+max-height: 85%;
+} */
