@@ -1,6 +1,6 @@
 import React from 'react';
 import { Fragment } from 'react';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Icon } from 'semantic-ui-react';
 import MediaControlCard from './MediaControlCard';
 // ======================================
 
@@ -12,11 +12,11 @@ class SidePlaybackBar extends React.Component {
         <div class="ui left fixed inverted menu">
             {
               this.props.selectedTrack != "" ?
-              <iframe style={{marginTop: '25vh'}} src={this.props.selectedTrack} width="250" height="500" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+              <iframe src={this.props.selectedTrack} style={{marginTop: '25vh'}} width="250" height="500" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
               :
               <Fragment />
             }
-
+            <i class="inverted angle right icon" style={{paddingTop: '50vh'}} onClick={this.props.showSidebar} size='large'/>
         </div>
       </div>
     )

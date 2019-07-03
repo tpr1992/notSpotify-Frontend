@@ -8,6 +8,7 @@ import SpotifyAuth from './Components/SpotifyAuth';
 import MusicControls from './Components/MusicControls';
 import MainContainer from './Containers/MainContainer';
 import SidePlaybackBar from './Components/SidePlaybackBar';
+import SidePlaybackBarArrow from './Components/SidePlaybackBarArrow';
 import MediaControlCard from './Components/MediaControlCard';
 import NowPlayingSwitch from './Components/NowPlayingSwitch';
 // ======================================
@@ -19,32 +20,34 @@ const spotifyWebApi = new Spotify()
 
 class App2 extends Component {
 
-    state = {
-      nowPlayingName: '',
-      nowPlayingArtist: '',
-      nowPlayingImage: '',
-      nowPlayingAlbumReleaseYear: '',
-      nowPlayingAlbumName: '',
-      artist: [],
-      searchResults: [],
-      query: '',
-      nowPlayingChecked: false,
-      loading: true,
-      loggedIn: null,
-      showUser: false,
-      userPlaylists: [],
+  state = {
+    nowPlayingName: '',
+    nowPlayingArtist: '',
+    nowPlayingImage: '',
+    nowPlayingAlbumReleaseYear: '',
+    nowPlayingAlbumName: '',
+    artist: [],
+    searchResults: [],
+    query: '',
+    nowPlayingChecked: false,
+    loading: true,
+    loggedIn: null,
+    showUser: false,
+    userPlaylists: [],
+    showSidebar: true,
+    userClickedOnTrack: 0,
 
-      currentUser: '',
-      trackPlaying: false,
-      initialSongPlayed: false,
-      track: '',
-      selectedTrack: ''
-    }
+    currentUser: '',
+    trackPlaying: false,
+    initialSongPlayed: false,
+    track: '',
+    selectedTrack: ''
+  }
 
-    componentDidMount() {
-      // setTimeout(this.handleLoader, 1500)
-      this.getPlaylists()
-    }
+  componentDidMount() {
+    // setTimeout(this.handleLoader, 1500)
+    this.getPlaylists()
+  }
 
   handleLoader = () => {
     this.setState({
@@ -131,8 +134,28 @@ class App2 extends Component {
   //  Grab link from track info in api, change embeded player source to selected track
   selectTrack = (link) => {
     this.setState({
-      selectedTrack: link.split('com').join('com/embed')
-    })
+      selectedTrack: link.split('com').join('com/embed'),
+      userClickedOnTrack: 1
+    }, () => this.handleSidebar())
+  }
+
+  //  Make sure user cannot hide the sidebar before the player is rendered initially
+  showSidebar = () => {
+    if (this.state.userClickedOnTrack > 0) {
+      this.setState({
+        showSidebar: !this.state.showSidebar
+      })
+    }
+  }
+
+  //  If showSidebar is toggled to false (not showing) but the user clicks a new track, override the state and show the player
+  handleSidebar = () => {
+    console.log('hello');
+    if (this.state.showSidebar != true && this.state.selectedTrack.length > 0) {
+      this.setState({
+        showSidebar: true
+      })
+    }
   }
 
   //  Searching spotify db for ONLY tracks
@@ -197,7 +220,12 @@ class App2 extends Component {
           null
         }
         <MainContainer userPlaylists={this.state.userPlaylists} selectTrack={this.selectTrack} searchResults={this.state.searchResults} nowPlayingArtist={this.state.nowPlayingArtist} nowPlayingName={this.state.nowPlayingName} nowPlayingImage={this.state.nowPlayingImage}  />
-        <SidePlaybackBar handleLoader={this.handleLoader} selectedTrack={this.state.selectedTrack} nowPlayingImage={this.state.track.image} nowPlayingArtist={this.state.track.artist} nowPlayingName={this.state.track.name} trackPlaying={this.state.trackPlaying} />
+        {
+          this.state.showSidebar ?
+          <SidePlaybackBar showSidebar={this.showSidebar} handleLoader={this.handleLoader} selectedTrack={this.state.selectedTrack} nowPlayingImage={this.state.track.image} nowPlayingArtist={this.state.track.artist} nowPlayingName={this.state.track.name} trackPlaying={this.state.trackPlaying} />
+          :
+          <SidePlaybackBarArrow showSidebar={this.showSidebar} />
+        }
 
 
 

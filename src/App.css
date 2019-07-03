@@ -31,12 +31,12 @@
 }
 
 div, button {
-  margin: .8vh;
-  padding: 1vh;
+  margin: .6vh;
+  padding: .7vh;
 }
 
 hr {
-  margin-top: .8vh;
+  margin-top: 1vh;
 }
 
 body {
@@ -60,17 +60,13 @@ body {
   font-size: 1.1rem;
 }
 
-.ui.button {
-  /* padding: 1.5vh !important; */
-  /* font-family: Architects Daughter !important; */
-}
 
 .ui.card {
   justify-content: center !important;
   padding: 1vh !important;
   width: 100vh !important;
-  margin: auto !important;
-  margin-bottom: 5vh !important;
+  margin: 2vh !important;
+  margin-bottom: 3vh !important;
   box-shadow: 5px 3px 7px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important;
   max-height: 85%;
 }
