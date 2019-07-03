@@ -7,6 +7,7 @@ import PlaybackBar from './Components/PlaybackBar';
 import SpotifyAuth from './Components/SpotifyAuth';
 import MusicControls from './Components/MusicControls';
 import MainContainer from './Containers/MainContainer';
+import SidePlaybackBar from './Components/SidePlaybackBar';
 import MediaControlCard from './Components/MediaControlCard';
 import NowPlayingSwitch from './Components/NowPlayingSwitch';
 // ======================================
@@ -196,11 +197,13 @@ class App2 extends Component {
           null
         }
         <MainContainer userPlaylists={this.state.userPlaylists} selectTrack={this.selectTrack} searchResults={this.state.searchResults} nowPlayingArtist={this.state.nowPlayingArtist} nowPlayingName={this.state.nowPlayingName} nowPlayingImage={this.state.nowPlayingImage}  />
-        <PlaybackBar handleLoader={this.handleLoader} selectedTrack={this.state.selectedTrack} nowPlayingImage={this.state.track.image} nowPlayingArtist={this.state.track.artist} nowPlayingName={this.state.track.name} trackPlaying={this.state.trackPlaying} />
+        <SidePlaybackBar handleLoader={this.handleLoader} selectedTrack={this.state.selectedTrack} nowPlayingImage={this.state.track.image} nowPlayingArtist={this.state.track.artist} nowPlayingName={this.state.track.name} trackPlaying={this.state.trackPlaying} />
+
+
+
       </div>
     )
   }
 }
-
 
 export default App2;
