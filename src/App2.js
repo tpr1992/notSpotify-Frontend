@@ -21,6 +21,7 @@ const spotifyWebApi = new Spotify()
 class App2 extends Component {
 
   state = {
+    //  Might delete, these were for old API
     nowPlayingName: '',
     nowPlayingArtist: '',
     nowPlayingImage: '',
@@ -35,8 +36,15 @@ class App2 extends Component {
     showUser: false,
     userPlaylists: [],
     showSidebar: true,
+    //  Counter for checking if a track has been played during a session yet. Use for sidebar logic.
     userClickedOnTrack: 0,
 
+    windowWidth: 'width: 100%',
+    windowAlignment: 'right',
+    leftSpacing: '14rem',
+    mainTitleMargin: '0%',
+    hrMargin: '10%',
+    // isWindowScaled: false,
     currentUser: '',
     trackPlaying: false,
     initialSongPlayed: false,
@@ -47,14 +55,11 @@ class App2 extends Component {
   componentDidMount() {
     // setTimeout(this.handleLoader, 1500)
     this.getPlaylists()
+    this.resizeWindow()
   }
 
+  //  Invoke whenever a fetch completes
   handleLoader = () => {
-    this.setState({
-      loading: false
-    })
-  }
-  handleLoader2 = () => {
     this.setState({
       loading: false
     })
@@ -131,19 +136,31 @@ class App2 extends Component {
     .then(this.getCurrentlyPlayingInfo)
   }
 
+
   //  Grab link from track info in api, change embeded player source to selected track
+  //  This runs when a track or playlist are clicked
   selectTrack = (link) => {
     this.setState({
       selectedTrack: link.split('com').join('com/embed'),
-      userClickedOnTrack: 1
+      userClickedOnTrack: this.state.userClickedOnTrack + 1,
+      showSidebar: !this.state.showSidebar,
+      windowAlignment: 'right',
+      leftSpacing: '14rem',
+      mainTitleMargin: '20%',
+      hrMargin: '32%'
     }, () => this.handleSidebar())
   }
 
   //  Make sure user cannot hide the sidebar before the player is rendered initially
+
   showSidebar = () => {
     if (this.state.userClickedOnTrack > 0) {
       this.setState({
-        showSidebar: !this.state.showSidebar
+        showSidebar: !this.state.showSidebar,
+        windowAlignment: this.state.showSidebar === true ? 'center' : 'right',
+        leftSpacing: this.state.showSidebar === true ? '0rem' : '14rem',
+        mainTitleMargin: this.state.showSidebar === true ? '0%' : '20%',
+        hrMargin: this.state.showSidebar === true ? '10%' : '32%'
       })
     }
   }
@@ -153,9 +170,26 @@ class App2 extends Component {
     console.log('hello');
     if (this.state.showSidebar != true && this.state.selectedTrack.length > 0) {
       this.setState({
-        showSidebar: true
+        showSidebar: true,
+        windowAlignment: 'right',
+        windowWidth: '75%',
+        leftSpacing: '14rem',
+        mainTitleMargin: '20%',
+        hrMargin: '32%'
       })
     }
+  }
+
+  resizeWindow = () => {
+    let newState;
+    newState = this.state.showSidebar === true && this.state.userClickedOnTrack > 0 ? "75%" : "100%";
+    this.setState({
+      windowWidth: newState,
+      windowAlignment: 'center',
+      leftSpacing: '0rem',
+      mainTitleMargin: '0%',
+      hrMargin: '10%'
+    })
   }
 
   //  Searching spotify db for ONLY tracks
@@ -187,10 +221,15 @@ class App2 extends Component {
   render() {
     console.log(this.state)
     return (
-      <div className='App'>
-        <span id='logo-header'>
-          <h1 id='header-text'>notSpotify();<i class='spotify icon'/></h1>
-        </span>
+
+
+      <div className='App' style={{textAlign: 'center', marginLeft: this.state.spaceLeft}}>
+
+        <div class='main-title' style={{marginLeft: this.state.mainTitleMargin}}>
+          <span id='logo-header'>
+            <h1 id='header-text'>notSpotify();<i class='spotify icon'/></h1>
+          </span>
+        </div>
         <SpotifyAuth setUser={this.setUser} />
         {
           this.state.loggedIn && this.state.showUser ?
@@ -199,9 +238,9 @@ class App2 extends Component {
           null
         }
         <br />
-        <hr />
+        <hr style={{marginLeft: this.state.hrMargin, marginRight: '10%'}} />
 
-        <div id='custom-search-box'>
+        <div id='custom-search-box' style={{marginLeft: this.state.mainTitleMargin}}>
           <div class='box box2'>
             <div class='evenboxinner'>
               <form onSubmit={this.searchTracks} >
@@ -219,10 +258,10 @@ class App2 extends Component {
           :
           null
         }
-        <MainContainer userPlaylists={this.state.userPlaylists} selectTrack={this.selectTrack} searchResults={this.state.searchResults} nowPlayingArtist={this.state.nowPlayingArtist} nowPlayingName={this.state.nowPlayingName} nowPlayingImage={this.state.nowPlayingImage}  />
+        <MainContainer spacing={this.state.leftSpacing} windowWidth={this.state.windowWidth} windowAlignment={this.state.windowAlignment} userPlaylists={this.state.userPlaylists} selectTrack={this.selectTrack} searchResults={this.state.searchResults} nowPlayingArtist={this.state.nowPlayingArtist} nowPlayingName={this.state.nowPlayingName} nowPlayingImage={this.state.nowPlayingImage}  />
         {
           this.state.showSidebar ?
-          <SidePlaybackBar showSidebar={this.showSidebar} handleLoader={this.handleLoader} selectedTrack={this.state.selectedTrack} nowPlayingImage={this.state.track.image} nowPlayingArtist={this.state.track.artist} nowPlayingName={this.state.track.name} trackPlaying={this.state.trackPlaying} />
+          <SidePlaybackBar animation='overlay' showSidebar={this.showSidebar} handleLoader={this.handleLoader} selectedTrack={this.state.selectedTrack} nowPlayingImage={this.state.track.image} nowPlayingArtist={this.state.track.artist} nowPlayingName={this.state.track.name} trackPlaying={this.state.trackPlaying} />
           :
           <SidePlaybackBarArrow showSidebar={this.showSidebar} />
         }

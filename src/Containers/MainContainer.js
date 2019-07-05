@@ -8,9 +8,13 @@ import MediaControlCard from '../Components/MediaControlCard';
 
 class MainContainer extends React.Component {
 
+  state = {
+    alignment: 'centered'
+  }
+
   render () {
     return (
-      <Grid centered>
+      <Grid centered style={{marginLeft: this.props.spacing}}>
         <Grid.Row columns={5}>
           {
             this.props.searchResults.length > 0 ?

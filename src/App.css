@@ -1,6 +1,7 @@
 
 .App {
-  text-align: center;
+  /* text-align: right; */
+  /* width: -50%; */
 }
 
 .App-header {
@@ -36,7 +37,8 @@ div, button {
 }
 
 hr {
-  margin-top: 1vh;
+  margin-top: -5vh;
+  margin-bottom: 5vh;
 }
 
 body {
@@ -67,11 +69,10 @@ body {
   width: 100vh !important;
   margin: 2vh !important;
   margin-bottom: 3vh !important;
+  /* margin-left: 75% !important; */
   box-shadow: 5px 3px 7px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important;
   max-height: 85%;
 }
-
-
 
 #header-text {
   display: center;
@@ -97,7 +98,6 @@ body {
   outline-color: black;
   opacity: .75;
 }
-
 
 .box{
   align-items: center;
@@ -161,6 +161,11 @@ body {
 
 iframe[Attributes Style] {
   display: flex !important;
+}
+
+.main-title {
+  /* margin-left: 20%; */
+  padding-bottom: 0px;
 }
 
 
