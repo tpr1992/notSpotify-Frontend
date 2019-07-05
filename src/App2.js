@@ -252,6 +252,7 @@ class App2 extends Component {
           <Button color='green' onClick={this.searchTracks}>Submit</Button>
           <Button color='green' onClick={this.getPlaylists}>My playlists</Button>
         </div>
+        <hr style={{marginTop: '1rem', marginLeft: this.state.hrMargin, marginRight: '10%'}} />
         {
           this.state.loading ?
           <div style={{marginTop: 40, marginRight: 10, padding: 15}} class="ui active inline loader"></div>
