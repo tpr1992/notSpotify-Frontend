@@ -1,7 +1,8 @@
 import React from 'react';
 import { Fragment } from 'react';
-import { Menu, Icon, Sidebar } from 'semantic-ui-react';
 import MediaControlCard from './MediaControlCard';
+import { Menu, Icon, Sidebar } from 'semantic-ui-react';
+import TransitionGroup from 'react-addons-transition-group';
 // ======================================
 
 class SidePlaybackBar extends React.Component {
@@ -9,10 +10,10 @@ class SidePlaybackBar extends React.Component {
   render () {
     return (
       <div class="playback-bar">
-        <div class="ui left fixed inverted menu">
+        <div class="ui left fixed overlay inverted menu">
             {
               this.props.selectedTrack != "" ?
-              <iframe src={this.props.selectedTrack} style={{marginTop: '25vh'}} width="250" height="500" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+              <iframe src={this.props.selectedTrack} style={{marginTop: '30vh'}} width="250" height="500" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
               :
               <Fragment />
             }

@@ -12,6 +12,7 @@ import SidePlaybackBarArrow from './Components/SidePlaybackBarArrow';
 import MediaControlCard from './Components/MediaControlCard';
 import NowPlayingSwitch from './Components/NowPlayingSwitch';
 // ======================================
+import TransitionGroup from 'react-addons-transition-group';
 import { Grid, Button, Form, Input, Segment, Menu } from 'semantic-ui-react';
 // ======================================
 
@@ -35,9 +36,11 @@ class App2 extends Component {
     loggedIn: null,
     showUser: false,
     userPlaylists: [],
+    featuredPlaylists: [],
     showSidebar: true,
     //  Counter for checking if a track has been played during a session yet. Use for sidebar logic.
     userClickedOnTrack: 0,
+    showFeaturedPlaylists: false,
 
     windowWidth: 'width: 100%',
     windowAlignment: 'right',
@@ -96,6 +99,20 @@ class App2 extends Component {
     })
   }
 
+  browseFeaturedPlaylists = () => {
+    fetch('http://localhost:3001/api/v2/browse_featured_playlists')
+    .then(res => res.json())
+    .then(data => {
+      this.setState({
+        featuredPlaylists: data,
+        searchResults: [],
+        showFeaturedPlaylists: !this.state.showFeaturedPlaylists
+
+      }, () => this.handleLoader())
+    })
+
+  }
+
   //  Setting currently playing in playback bar and in custom controls
   getCurrentlyPlayingInfo = () => {
     fetch('http://localhost:3001/api/v2/tracks/get_currently_playing')
@@ -152,7 +169,6 @@ class App2 extends Component {
   }
 
   //  Make sure user cannot hide the sidebar before the player is rendered initially
-
   showSidebar = () => {
     if (this.state.userClickedOnTrack > 0) {
       this.setState({
@@ -167,7 +183,6 @@ class App2 extends Component {
 
   //  If showSidebar is toggled to false (not showing) but the user clicks a new track, override the state and show the player
   handleSidebar = () => {
-    console.log('hello');
     if (this.state.showSidebar != true && this.state.selectedTrack.length > 0) {
       this.setState({
         showSidebar: true,
@@ -219,7 +234,7 @@ class App2 extends Component {
   }
 
   render() {
-    console.log(this.state)
+    console.log(window.innerHeight, window.innerWidth);
     return (
 
 
@@ -251,6 +266,7 @@ class App2 extends Component {
 
           <Button color='green' onClick={this.searchTracks}>Submit</Button>
           <Button color='green' onClick={this.getPlaylists}>My playlists</Button>
+          <Button color='green' onClick={this.browseFeaturedPlaylists}>Featured playlists</Button>
         </div>
         <hr style={{marginTop: '1rem', marginLeft: this.state.hrMargin, marginRight: '10%'}} />
         {
@@ -260,12 +276,14 @@ class App2 extends Component {
           null
         }
         <MainContainer spacing={this.state.leftSpacing} windowWidth={this.state.windowWidth} windowAlignment={this.state.windowAlignment} userPlaylists={this.state.userPlaylists} selectTrack={this.selectTrack} searchResults={this.state.searchResults} nowPlayingArtist={this.state.nowPlayingArtist} nowPlayingName={this.state.nowPlayingName} nowPlayingImage={this.state.nowPlayingImage}  />
+        <TransitionGroup transitionName='FadeIn'>
         {
           this.state.showSidebar ?
-          <SidePlaybackBar animation='overlay' showSidebar={this.showSidebar} handleLoader={this.handleLoader} selectedTrack={this.state.selectedTrack} nowPlayingImage={this.state.track.image} nowPlayingArtist={this.state.track.artist} nowPlayingName={this.state.track.name} trackPlaying={this.state.trackPlaying} />
+          <SidePlaybackBar showSidebar={this.showSidebar} handleLoader={this.handleLoader} selectedTrack={this.state.selectedTrack} nowPlayingImage={this.state.track.image} nowPlayingArtist={this.state.track.artist} nowPlayingName={this.state.track.name} trackPlaying={this.state.trackPlaying} />
           :
           <SidePlaybackBarArrow showSidebar={this.showSidebar} />
         }
+      </TransitionGroup>
 
 
 

@@ -45,7 +45,6 @@ body {
   /* background: #333 !important; */
 }
 
-
 .github-icon {
   /* margin-top: 10px; */
   padding-top: .5vh;
@@ -62,6 +61,14 @@ body {
   font-size: 1.1rem;
 }
 
+.FadeIn-enter {
+  opacity: 0.01;
+  transition: opacity .5s;
+
+  &.FadeIn-enter-active {
+    opacity: 1;
+  }
+}
 
 .ui.card {
   justify-content: center !important;

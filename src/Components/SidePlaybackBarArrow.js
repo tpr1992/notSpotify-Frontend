@@ -5,7 +5,6 @@ import MediaControlCard from './MediaControlCard';
 // ======================================
 
 class SidePlaybackBarArrow extends React.Component {
-
   render () {
     return (
       <div class="playback-bar">

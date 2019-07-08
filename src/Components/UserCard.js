@@ -3,7 +3,6 @@ import { Menu, Dropdown } from 'semantic-ui-react';
 
 
 const UserCard = (props) => {
-  console.log(props);
   return (
     <div class="user-info">
       <div class="ui text menu">

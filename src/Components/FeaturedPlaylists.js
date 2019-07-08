@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Label } from 'semantic-ui-react';
 // ======================================
 
-const UserPlaylists = (props) => {
+const FeaturedPlaylists = (props) => {
   return (
     <div class="ui card" onClick={() => props.selectTrack(props.playlist.external_urls.spotify)} style={{backgroundColor: '#1d1d1e', color: '#fff', textAlign: 'center', opacity: 1}}>
       <div class="image"><img src={props.playlist.images[0].url} /></div>
@@ -18,4 +18,4 @@ const UserPlaylists = (props) => {
   )
 }
 
-export default UserPlaylists;
+export default FeaturedPlaylists;
