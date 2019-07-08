@@ -8,11 +8,11 @@ import SpotifyAuth from './Components/SpotifyAuth';
 import MusicControls from './Components/MusicControls';
 import MainContainer from './Containers/MainContainer';
 import SidePlaybackBar from './Components/SidePlaybackBar';
-import SidePlaybackBarArrow from './Components/SidePlaybackBarArrow';
 import MediaControlCard from './Components/MediaControlCard';
 import NowPlayingSwitch from './Components/NowPlayingSwitch';
+import FeaturedPlaylists from './Components/FeaturedPlaylists';
+import SidePlaybackBarArrow from './Components/SidePlaybackBarArrow';
 // ======================================
-import TransitionGroup from 'react-addons-transition-group';
 import { Grid, Button, Form, Input, Segment, Menu } from 'semantic-ui-react';
 // ======================================
 
@@ -107,7 +107,6 @@ class App2 extends Component {
         featuredPlaylists: data,
         searchResults: [],
         showFeaturedPlaylists: !this.state.showFeaturedPlaylists
-
       }, () => this.handleLoader())
     })
 
@@ -234,12 +233,8 @@ class App2 extends Component {
   }
 
   render() {
-    console.log(window.innerHeight, window.innerWidth);
     return (
-
-
       <div className='App' style={{textAlign: 'center', marginLeft: this.state.spaceLeft}}>
-
         <div class='main-title' style={{marginLeft: this.state.mainTitleMargin}}>
           <span id='logo-header'>
             <h1 id='header-text'>notSpotify();<i class='spotify icon'/></h1>
@@ -275,15 +270,19 @@ class App2 extends Component {
           :
           null
         }
-        <MainContainer spacing={this.state.leftSpacing} windowWidth={this.state.windowWidth} windowAlignment={this.state.windowAlignment} userPlaylists={this.state.userPlaylists} selectTrack={this.selectTrack} searchResults={this.state.searchResults} nowPlayingArtist={this.state.nowPlayingArtist} nowPlayingName={this.state.nowPlayingName} nowPlayingImage={this.state.nowPlayingImage}  />
-        <TransitionGroup transitionName='FadeIn'>
+        {
+          this.state.showFeaturedPlaylists && this.state.featuredPlaylists.length > 0 ?
+          <FeaturedPlaylists playlists={this.state.featuredPlaylists} selectTrack={this.selectTrack} />
+          :
+          null
+        }
+        <MainContainer spacing={this.state.leftSpacing} windowWidth={this.state.windowWidth} windowAlignment={this.state.windowAlignment} userPlaylists={this.state.userPlaylists} selectTrack={this.selectTrack} showFeaturedPlaylists={this.state.showFeaturedPlaylists} featuredPlaylists={this.state.featuredPlaylists} searchResults={this.state.searchResults} nowPlayingArtist={this.state.nowPlayingArtist} nowPlayingName={this.state.nowPlayingName} nowPlayingImage={this.state.nowPlayingImage} />
         {
           this.state.showSidebar ?
           <SidePlaybackBar showSidebar={this.showSidebar} handleLoader={this.handleLoader} selectedTrack={this.state.selectedTrack} nowPlayingImage={this.state.track.image} nowPlayingArtist={this.state.track.artist} nowPlayingName={this.state.track.name} trackPlaying={this.state.trackPlaying} />
           :
           <SidePlaybackBarArrow showSidebar={this.showSidebar} />
         }
-      </TransitionGroup>
 
 
 

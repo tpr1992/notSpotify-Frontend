@@ -4,6 +4,7 @@ import { Grid } from 'semantic-ui-react';
 import StackGrid from 'react-stack-grid';
 import SearchResults from '../Components/SearchResults';
 import UserPlaylists from '../Components/UserPlaylists';
+import FeaturedPlaylists from '../Components/FeaturedPlaylists';
 import MediaControlCard from '../Components/MediaControlCard';
 
 class MainContainer extends React.Component {
@@ -25,6 +26,14 @@ class MainContainer extends React.Component {
             this.props.userPlaylists.map(playlist => {
               return <Grid.Column> {<UserPlaylists selectTrack={this.props.selectTrack} playlist={playlist} key={playlist.id} />} </Grid.Column>
             })
+          }
+          {
+            this.props.showFeaturedPlaylists === true ?
+            this.props.featuredPlaylists.map(playlist => {
+              return <Grid.Column> {<FeaturedPlaylists selectTrack={this.props.selectTrack} playlist={playlist} key={playlist.id} />} </Grid.Column>
+            })
+            :
+            null
           }
         </Grid.Row>
       </Grid>

@@ -2,7 +2,6 @@ import React from 'react';
 import { Fragment } from 'react';
 import MediaControlCard from './MediaControlCard';
 import { Menu, Icon, Sidebar } from 'semantic-ui-react';
-import TransitionGroup from 'react-addons-transition-group';
 // ======================================
 
 class SidePlaybackBar extends React.Component {
