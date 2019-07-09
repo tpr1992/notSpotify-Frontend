@@ -37,6 +37,7 @@ class App2 extends Component {
     showUser: false,
     userPlaylists: [],
     featuredPlaylists: [],
+    artistSearchResults: [],
     showSidebar: true,
     //  Counter for checking if a track has been played during a session yet. Use for sidebar logic.
     userClickedOnTrack: 0,
@@ -86,6 +87,11 @@ class App2 extends Component {
         showUser: !this.state.showUser
       })
     })
+  }
+
+  goToArtistPage = (artistUri) => {
+    // debugger
+    this.selectTrack(artistUri)
   }
 
   getPlaylists = () => {
@@ -211,7 +217,10 @@ class App2 extends Component {
   searchTracks = (event) => {
     event.preventDefault()
     this.setState({
-      loading: true
+      loading: true,
+      searchResults: [],
+      artistSearchResults: [],
+      userPlaylists: []
     })
     fetch('http://localhost:3001/api/v2/search_tracks', {
       method: 'POST',
@@ -225,11 +234,29 @@ class App2 extends Component {
     })
     .then(res => res.json())
     .then(results => {
-      this.setState({
-        searchResults: results
-      }, () => this.setState({
-        loading: false
-      }))
+      results.forEach(result => {
+        console.log(result.type);
+        if (result.type === 'artist') {
+          this.setState({
+            artistSearchResults: [...this.state.artistSearchResults, result]
+          }, () => this.setState({
+            loading: false
+          }))
+        }
+        else {
+          this.setState({
+            searchResults: [...this.state.searchResults, result]
+          }, () => this.setState({
+            loading: false
+          }))
+        }
+      })
+      // this.setState({
+      //   searchResults: results.slice(3),
+      //   artistSearchResults: results.slice(0, 3)
+      // }, () => this.setState({
+      //   loading: false
+      // }))
     })
   }
 
@@ -277,7 +304,7 @@ class App2 extends Component {
           :
           null
         }
-        <MainContainer spacing={this.state.leftSpacing} windowWidth={this.state.windowWidth} windowAlignment={this.state.windowAlignment} userPlaylists={this.state.userPlaylists} selectTrack={this.selectTrack} showFeaturedPlaylists={this.state.showFeaturedPlaylists} featuredPlaylists={this.state.featuredPlaylists} searchResults={this.state.searchResults} nowPlayingArtist={this.state.nowPlayingArtist} nowPlayingName={this.state.nowPlayingName} nowPlayingImage={this.state.nowPlayingImage} />
+        <MainContainer goToArtistPage={this.goToArtistPage} spacing={this.state.leftSpacing} windowWidth={this.state.windowWidth} windowAlignment={this.state.windowAlignment} userPlaylists={this.state.userPlaylists} selectTrack={this.selectTrack} showFeaturedPlaylists={this.state.showFeaturedPlaylists} featuredPlaylists={this.state.featuredPlaylists} artistSearchResults={this.state.artistSearchResults} searchResults={this.state.searchResults} />
         {
           this.state.showSidebar ?
           <SidePlaybackBar showSidebar={this.showSidebar} handleLoader={this.handleLoader} selectedTrack={this.state.selectedTrack} nowPlayingImage={this.state.track.image} nowPlayingArtist={this.state.track.artist} nowPlayingName={this.state.track.name} trackPlaying={this.state.trackPlaying} />

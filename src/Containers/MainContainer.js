@@ -4,8 +4,9 @@ import { Grid } from 'semantic-ui-react';
 import StackGrid from 'react-stack-grid';
 import SearchResults from '../Components/SearchResults';
 import UserPlaylists from '../Components/UserPlaylists';
-import FeaturedPlaylists from '../Components/FeaturedPlaylists';
 import MediaControlCard from '../Components/MediaControlCard';
+import FeaturedPlaylists from '../Components/FeaturedPlaylists';
+import ArtistSearchResults from '../Components/ArtistSearchResults';
 
 class MainContainer extends React.Component {
 
@@ -14,13 +15,22 @@ class MainContainer extends React.Component {
   }
 
   render () {
+    console.log(this.props.artistSearchResults);
     return (
       <Grid centered style={{marginLeft: this.props.spacing}}>
         <Grid.Row columns={5}>
           {
+            this.props.artistSearchResults.length > 0 ?
+            this.props.artistSearchResults.map(result => {
+              return <Grid.Column> {<ArtistSearchResults artistSearchResults={this.props.artistSearchResults} selectTrack={this.props.selectTrack} result={result} key={result.id} />}</Grid.Column>
+            })
+            :
+            <Fragment />
+          }
+          {
             this.props.searchResults.length > 0 ?
             this.props.searchResults.map(result => {
-              return <Grid.Column> {<SearchResults selectTrack={this.props.selectTrack} result={result} key={result.id} />} </Grid.Column>
+              return <Grid.Column> {<SearchResults goToArtistPage={this.props.goToArtistPage} selectTrack={this.props.selectTrack} result={result} key={result.id} />} </Grid.Column>
             })
             :
             this.props.userPlaylists.map(playlist => {

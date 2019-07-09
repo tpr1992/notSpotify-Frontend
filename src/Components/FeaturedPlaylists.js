@@ -13,8 +13,8 @@ class FeaturedPlaylists extends React.Component {
     console.log(this.props.playlists);
     return (
       <Fragment>
+        
 
-    
       </Fragment>
     )
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu, Dropdown } from 'semantic-ui-react';
+import { Dropdown } from 'semantic-ui-react';
 
 
 const UserCard = (props) => {
