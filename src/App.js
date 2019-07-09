@@ -256,3 +256,33 @@ export default App2;
 //   </Grid.Row>
 // </Grid>
 //
+
+
+  //  ** Custom controls - Play song
+  // playTrack = () => {
+  //   fetch('http://localhost:3001/api/v2/tracks/play_track')
+  //   .then(this.setState({
+  //     trackPlaying: true,
+  //     initialSongPlayed: true
+  //   }, () => this.getCurrentlyPlayingInfo())
+  // )}
+  //
+  // //  **Custom controls - Pause song
+  // pauseTrack = () => {
+  //   fetch('http://localhost:3001/api/v2/tracks/pause_track')
+  //   .then(this.setState({
+  //     trackPlaying: false
+  //   })
+  // )}
+  //
+  // //  **Custom controls - Next song
+  // nextTrack = () => {
+  //   fetch('http://localhost:3001/api/v2/tracks/next_track')
+  //   .then(this.getCurrentlyPlayingInfo)
+  // }
+  //
+  // //  **Custom controls - Previous song
+  // prevTrack = () => {
+  //   fetch('http://localhost:3001/api/v2/tracks/prev_track')
+  //   .then(this.getCurrentlyPlayingInfo)
+  // }

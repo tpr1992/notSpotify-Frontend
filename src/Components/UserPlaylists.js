@@ -8,9 +8,12 @@ const UserPlaylists = (props) => {
       <div class="image"><img src={props.playlist.images[0].url} /></div>
       <div class="content">
         <div class="search-result-header">{props.playlist.name}</div>
-          <div class="meta">
-            <span style={{color: 'white'}}>
-              {props.playlist.total} Songs
+          <div class="ui mini horizontal statistic">
+            <span class='value' style={{color: 'white', fontSize: '.8em', marginBottom: '1vh'}}>
+              {props.playlist.total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '1,')}
+            </span>
+            <span class='label' style={{color: 'white', fontSize: '.7em'}}>
+              Songs
             </span>
           </div>
       </div>

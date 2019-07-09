@@ -90,7 +90,6 @@ class App2 extends Component {
   }
 
   goToArtistPage = (artistUri) => {
-    // debugger
     this.selectTrack(artistUri)
   }
 
@@ -101,6 +100,7 @@ class App2 extends Component {
       this.setState({
         userPlaylists: data,
         searchResults: [],
+        artistSearchResults: [],
         query: ''
       }, () => this.handleLoader())
     })
@@ -129,36 +129,6 @@ class App2 extends Component {
       })
     })
   }
-
-  //  ** Custom controls - Play song
-  playTrack = () => {
-    fetch('http://localhost:3001/api/v2/tracks/play_track')
-    .then(this.setState({
-      trackPlaying: true,
-      initialSongPlayed: true
-    }, () => this.getCurrentlyPlayingInfo())
-  )}
-
-  //  **Custom controls - Pause song
-  pauseTrack = () => {
-    fetch('http://localhost:3001/api/v2/tracks/pause_track')
-    .then(this.setState({
-      trackPlaying: false
-    })
-  )}
-
-  //  **Custom controls - Next song
-  nextTrack = () => {
-    fetch('http://localhost:3001/api/v2/tracks/next_track')
-    .then(this.getCurrentlyPlayingInfo)
-  }
-
-  //  **Custom controls - Previous song
-  prevTrack = () => {
-    fetch('http://localhost:3001/api/v2/tracks/prev_track')
-    .then(this.getCurrentlyPlayingInfo)
-  }
-
 
   //  Grab link from track info in api, change embeded player source to selected track
   //  This runs when a track or playlist are clicked
@@ -235,8 +205,9 @@ class App2 extends Component {
     .then(res => res.json())
     .then(results => {
       results.forEach(result => {
-        console.log(result.type);
-        if (result.type === 'artist') {
+        console.log(result);
+        if (result.type === 'artist' && result.images.length !== 0) {
+          // debugger
           this.setState({
             artistSearchResults: [...this.state.artistSearchResults, result]
           }, () => this.setState({
@@ -304,7 +275,7 @@ class App2 extends Component {
           :
           null
         }
-        <MainContainer goToArtistPage={this.goToArtistPage} spacing={this.state.leftSpacing} windowWidth={this.state.windowWidth} windowAlignment={this.state.windowAlignment} userPlaylists={this.state.userPlaylists} selectTrack={this.selectTrack} showFeaturedPlaylists={this.state.showFeaturedPlaylists} featuredPlaylists={this.state.featuredPlaylists} artistSearchResults={this.state.artistSearchResults} searchResults={this.state.searchResults} />
+        <MainContainer goToArtistPage={this.goToArtistPage} spacing={this.state.leftSpacing} windowWidth={this.state.windowWidth} windowAlignment={this.state.windowAlignment} showSidebar={this.state.showSidebar} userClickedOnTrack={this.state.userClickedOnTrack} userPlaylists={this.state.userPlaylists} selectTrack={this.selectTrack} showFeaturedPlaylists={this.state.showFeaturedPlaylists} featuredPlaylists={this.state.featuredPlaylists} artistSearchResults={this.state.artistSearchResults} searchResults={this.state.searchResults} />
         {
           this.state.showSidebar ?
           <SidePlaybackBar showSidebar={this.showSidebar} handleLoader={this.handleLoader} selectedTrack={this.state.selectedTrack} nowPlayingImage={this.state.track.image} nowPlayingArtist={this.state.track.artist} nowPlayingName={this.state.track.name} trackPlaying={this.state.trackPlaying} />

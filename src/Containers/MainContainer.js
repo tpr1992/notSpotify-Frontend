@@ -22,7 +22,7 @@ class MainContainer extends React.Component {
           {
             this.props.artistSearchResults.length > 0 ?
             this.props.artistSearchResults.map(result => {
-              return <Grid.Column> {<ArtistSearchResults artistSearchResults={this.props.artistSearchResults} selectTrack={this.props.selectTrack} result={result} key={result.id} />}</Grid.Column>
+              return <Grid.Column> {<ArtistSearchResults artistSearchResults={this.props.artistSearchResults} selectTrack={this.props.selectTrack} result={result} key={result.id} showSidebar={this.props.showSidebar} userClickedOnTrack={this.props.userClickedOnTrack} />}</Grid.Column>
             })
             :
             <Fragment />

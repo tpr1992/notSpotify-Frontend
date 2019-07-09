@@ -79,6 +79,13 @@ body {
   /* margin-left: 75% !important; */
   box-shadow: 5px 3px 7px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important;
   max-height: 85%;
+  letter-spacing: .05rem;
+  font-family: Lucida Grande;
+}
+
+#artist-search-header {
+  font-size: larger;
+  letter-spacing: .08rem;
 }
 
 #header-text {
@@ -164,6 +171,7 @@ body {
 .search-result-header {
   font-size: 1.22em;
   font-weight: bolder;
+  margin-top: 0;
 }
 
 iframe[Attributes Style] {
