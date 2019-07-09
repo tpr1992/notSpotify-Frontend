@@ -94,7 +94,8 @@ class App2 extends Component {
     .then(data => {
       this.setState({
         userPlaylists: data,
-        searchResults: []
+        searchResults: [],
+        query: ''
       }, () => this.handleLoader())
     })
   }
