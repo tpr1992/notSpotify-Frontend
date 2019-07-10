@@ -4,7 +4,6 @@ import { Grid } from 'semantic-ui-react';
 
 
 const ArtistSearchResults = (props) => {
-  // debugger
   console.log(props.artistSearchResults);
   return (
     <Fragment>
@@ -17,7 +16,7 @@ const ArtistSearchResults = (props) => {
               props.showSidebar && props.userClickedOnTrack > 0 ?
               <img src={props.result.images[0].url || props.result.images[1].url} style={{ minHeight: '20vh', maxHeight: '22vh', height: '20vh', width: '20vh', borderRadius: '100px' }} />
               :
-              <img src={props.result.images[0].url || props.result.images[1].url} style={{ height: '100%', width: '100%', borderRadius: '100px' }} />
+              <img src={props.result.images[0].url || props.result.images[1].url} style={{ minWidth: '26vh', minHeight: '26vh', maxHeight: '26vh', borderRadius: '75vh'  }} />
             }
           </div>
           <div class="content">
@@ -41,8 +40,3 @@ const ArtistSearchResults = (props) => {
 }
 
 export default ArtistSearchResults;
-
-
-// <div id='artist-search-header' style={{color: 'white', margin: '.3vh', padding: '.4vh'}}>
-//   Artist
-// </div>

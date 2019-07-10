@@ -22,38 +22,35 @@ const spotifyWebApi = new Spotify()
 class App2 extends Component {
 
   state = {
-    //  Might delete, these were for old API
-    nowPlayingName: '',
-    nowPlayingArtist: '',
-    nowPlayingImage: '',
-    nowPlayingAlbumReleaseYear: '',
-    nowPlayingAlbumName: '',
-    artist: [],
-    searchResults: [],
+    // ======================
+    //  Main state
     query: '',
-    nowPlayingChecked: false,
     loading: true,
     loggedIn: null,
     showUser: false,
+    currentUser: '',
+    showSidebar: true,
     userPlaylists: [],
+    searchResults: [],
     featuredPlaylists: [],
     artistSearchResults: [],
-    showSidebar: true,
+    nowPlayingChecked: false,
     //  Counter for checking if a track has been played during a session yet. Use for sidebar logic.
     userClickedOnTrack: 0,
     showFeaturedPlaylists: false,
-
-    windowWidth: 'width: 100%',
-    windowAlignment: 'right',
+    // ======================
+    //  Handle scaling for popout media player
+    hrMargin: '10%',
     leftSpacing: '14rem',
     mainTitleMargin: '0%',
-    hrMargin: '10%',
-    // isWindowScaled: false,
-    currentUser: '',
-    trackPlaying: false,
-    initialSongPlayed: false,
+    windowAlignment: 'right',
+    windowWidth: 'width: 100%',
+    // ======================
+    //  Media player
     track: '',
-    selectedTrack: ''
+    selectedTrack: '',
+    trackPlaying: false,
+    initialSongPlayed: false
   }
 
   componentDidMount() {
@@ -89,10 +86,12 @@ class App2 extends Component {
     })
   }
 
+  //  Opens top tracks of selected artist via artistSearch
   goToArtistPage = (artistUri) => {
     this.selectTrack(artistUri)
   }
 
+  //  Run on componentDidMount, gets user's playlists
   getPlaylists = () => {
     fetch('http://localhost:3001/api/v2/get_playlists')
     .then(res => res.json())
@@ -106,6 +105,7 @@ class App2 extends Component {
     })
   }
 
+  //  WIP - return to later
   browseFeaturedPlaylists = () => {
     fetch('http://localhost:3001/api/v2/browse_featured_playlists')
     .then(res => res.json())
@@ -171,6 +171,7 @@ class App2 extends Component {
     }
   }
 
+  //  Handle scaling for sidebar and grid elements
   resizeWindow = () => {
     let newState;
     newState = this.state.showSidebar === true && this.state.userClickedOnTrack > 0 ? "75%" : "100%";
@@ -183,7 +184,7 @@ class App2 extends Component {
     })
   }
 
-  //  Searching spotify db for ONLY tracks
+  //  Searching spotify db for tracks and artists, then sort into respective states
   searchTracks = (event) => {
     event.preventDefault()
     this.setState({
@@ -205,9 +206,7 @@ class App2 extends Component {
     .then(res => res.json())
     .then(results => {
       results.forEach(result => {
-        console.log(result);
         if (result.type === 'artist' && result.images.length !== 0) {
-          // debugger
           this.setState({
             artistSearchResults: [...this.state.artistSearchResults, result]
           }, () => this.setState({
@@ -222,22 +221,20 @@ class App2 extends Component {
           }))
         }
       })
-      // this.setState({
-      //   searchResults: results.slice(3),
-      //   artistSearchResults: results.slice(0, 3)
-      // }, () => this.setState({
-      //   loading: false
-      // }))
     })
+  }
+
+  reloadPage = () => {
+    // window.location.reload()
   }
 
   render() {
     return (
-      <div className='App' style={{textAlign: 'center', marginLeft: this.state.spaceLeft}}>
+      <div className='App' style={{ textAlign: 'center', marginLeft: this.state.spaceLeft }}>
         <div class='ui sticky'>
-        <div class='main-title' style={{marginLeft: this.state.mainTitleMargin}}>
+        <div class='main-title' style={{ marginLeft: this.state.mainTitleMargin }}>
           <span id='logo-header'>
-            <h1 id='header-text'>notSpotify();<i class='spotify icon'/></h1>
+            <h1 id='header-text' onClick={this.reloadPage}>notSpotify();<i class='spotify icon'/></h1>
           </span>
         </div>
         </div>
@@ -259,7 +256,8 @@ class App2 extends Component {
               </form>
             </div>
           </div>
-        
+          <Input type='text' placeholder='Search...' value={this.state.query} onChange={this.captureSearch} style={{ filter: 'drop-shadow(0px 11px 35px #d4d4d5)', border: 'none'
+ }} />
 
 
           <Button color='green' onClick={this.searchTracks}>Submit</Button>
@@ -269,7 +267,7 @@ class App2 extends Component {
         <hr style={{marginTop: '1rem', marginLeft: this.state.hrMargin, marginRight: '10%'}} />
         {
           this.state.loading ?
-          <div style={{marginTop: 40, marginRight: 10, padding: 15}} class="ui active inline loader"></div>
+          <div style={{ marginTop: 40, marginRight: 10, padding: 15, filter: 'drop-shadow(0px 11px 35px #d4d4d5)' }} class="ui active inline loader"></div>
           :
           null
         }

@@ -9,7 +9,7 @@ class SidePlaybackBarArrow extends React.Component {
     return (
       <div class="playback-bar">
         <div class="ui left fixed inverted menu">
-            <i class="inverted angle right icon" style={{ position: 'relative', zIndex: '1', marginTop: '50vh', cursor: 'pointer' }} onClick={this.props.showSidebar} size='large'/>
+          <i class="inverted angle right icon" style={{ position: 'relative', zIndex: '1', marginTop: '50vh', cursor: 'pointer' }} onClick={this.props.showSidebar} size='large'/>
         </div>
       </div>
     )

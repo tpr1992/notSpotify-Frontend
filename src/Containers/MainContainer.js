@@ -15,10 +15,10 @@ class MainContainer extends React.Component {
   }
 
   render () {
-    console.log(this.props.artistSearchResults);
+    console.log(this.props.spacing);
     return (
       <Grid centered style={{marginLeft: this.props.spacing}}>
-        <Grid.Row columns={5}>
+        <Grid.Row columns={ this.props.spacing === '0rem' ? 6 : 5 } >
           {
             this.props.artistSearchResults.length > 0 ?
             this.props.artistSearchResults.map(result => {

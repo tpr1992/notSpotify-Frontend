@@ -4,8 +4,6 @@ import { Card } from 'semantic-ui-react';
 // ======================================
 
 const searchResults = (props) => {
-  console.log(props.result);
-  // debugger
   return (
     <Fragment>
       {
@@ -19,9 +17,9 @@ const searchResults = (props) => {
         </div>
         :
         <Fragment />
-    }
-  </Fragment>
-)
+      }
+    </Fragment>
+  )
 }
 
 export default searchResults;
