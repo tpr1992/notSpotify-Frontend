@@ -234,10 +234,12 @@ class App2 extends Component {
   render() {
     return (
       <div className='App' style={{textAlign: 'center', marginLeft: this.state.spaceLeft}}>
+        <div class='ui sticky'>
         <div class='main-title' style={{marginLeft: this.state.mainTitleMargin}}>
           <span id='logo-header'>
             <h1 id='header-text'>notSpotify();<i class='spotify icon'/></h1>
           </span>
+        </div>
         </div>
         <SpotifyAuth setUser={this.setUser} />
         {
@@ -253,7 +255,7 @@ class App2 extends Component {
           <div class='box box2'>
             <div class='evenboxinner'>
               <form onSubmit={this.searchTracks} >
-                <Input icon='search' type='text' id='custom-search' value={this.state.query} placeholder='Search...' onChange={this.captureSearch} />
+                <Input icon='search' type='text' id='custom-search' value={this.state.query} placeholder='Search...' onChange={this.captureSearch} style={{ zIndex: '1', cursor: 'pointer' }} />
               </form>
             </div>
           </div>
@@ -282,9 +284,6 @@ class App2 extends Component {
           :
           <SidePlaybackBarArrow showSidebar={this.showSidebar} />
         }
-
-
-
       </div>
     )
   }

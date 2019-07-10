@@ -12,11 +12,11 @@ class SidePlaybackBar extends React.Component {
         <div class="ui left fixed overlay inverted menu">
             {
               this.props.selectedTrack != "" ?
-              <iframe src={this.props.selectedTrack} style={{marginTop: '30vh'}} width="250" height="500" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+              <iframe src={this.props.selectedTrack} style={{ marginTop: '30vh' }} width="250" height="500" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
               :
               <Fragment />
             }
-            <i class="inverted angle right icon" style={{paddingTop: '50vh'}} onClick={this.props.showSidebar} size='large'/>
+            <i class="inverted angle right icon" style={{ position: 'relative', zIndex: '1', marginTop: '50vh', cursor: 'pointer' }} onClick={this.props.showSidebar} size='large'/>
             <Sidebar />
         </div>
       </div>

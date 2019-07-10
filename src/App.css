@@ -5,7 +5,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -18,7 +18,6 @@
 }
 
 .App-link {
-  /* color: #61dafb; */
   display: none;
 }
 
@@ -42,7 +41,7 @@ hr {
 }
 
 body {
-  /* background: #333 !important; */
+  background: #616161 !important;
 }
 
 .github-icon {
@@ -72,13 +71,14 @@ body {
 
 .ui.card {
   justify-content: center !important;
-  padding: 1vh !important;
+  padding: .5vh !important;
   width: 100vh !important;
-  margin: 2vh !important;
-  margin-bottom: 3vh !important;
+  margin-bottom: 1.5vh !important;
   /* margin-left: 75% !important; */
-  box-shadow: 5px 3px 7px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important;
-  max-height: 85%;
+  border-radius: 0px !important;
+  min-height: 53vh !important;
+  /* box-shadow: 5px 3px 7px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important; */
+  box-shadow: 1px 1px 14px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important;
   letter-spacing: .05rem;
   font-family: Lucida Grande;
 }
@@ -95,7 +95,7 @@ body {
   font-family: Architects Daughter;
   padding: 2vh;
   width: 100%;
-  margin-bottom: 4vh;
+  margin-bottom: 3vh;
   color: white;
   text-shadow:
   2px 2px 0 #000,
@@ -103,7 +103,7 @@ body {
   1px -1px 0 #000,
   -1px 1px 0 #000,
   1px 1px 0 #000;
-  opacity: .75;
+  opacity: .8;
 }
 
 #logo-header {
@@ -154,6 +154,7 @@ body {
   font-size: 1.15em;
   background: none;
   display: flex;
+  color: white;
   justify-content: space-between;
   /* font-family: Architects Daughter; */
   font-family: Lato;
@@ -185,13 +186,3 @@ iframe[Attributes Style] {
 
 
 /* =============================================================== */
-
-/* .ui.card {
-justify-content: center !important;
-padding: 1vh !important;
-width: 100vh !important;
-margin: auto !important;
-margin-bottom: 5vh !important;
-box-shadow: 5px 3px 7px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important;
-max-height: 85%;
-} */
