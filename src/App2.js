@@ -259,6 +259,8 @@ class App2 extends Component {
               </form>
             </div>
           </div>
+        
+
 
           <Button color='green' onClick={this.searchTracks}>Submit</Button>
           <Button color='green' onClick={this.getPlaylists}>My playlists</Button>

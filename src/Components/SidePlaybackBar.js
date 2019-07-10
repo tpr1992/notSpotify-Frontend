@@ -11,12 +11,7 @@ class SidePlaybackBar extends React.Component {
     return (
       <div class="playback-bar">
         <div class="ui left fixed overlay inverted menu">
-          {
-            this.props.currentUser.length > 0 ?
-            <img src={this.props.currentUser.user_image} />
-            :
-            <Fragment />
-          }
+
             {
               this.props.selectedTrack != "" ?
               <Fragment>
