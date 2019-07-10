@@ -7,12 +7,21 @@ import { Menu, Icon, Sidebar } from 'semantic-ui-react';
 class SidePlaybackBar extends React.Component {
 
   render () {
+    console.log(this.props.currentUser);
     return (
       <div class="playback-bar">
         <div class="ui left fixed overlay inverted menu">
+          {
+            this.props.currentUser.length > 0 ?
+            <img src={this.props.currentUser.user_image} />
+            :
+            <Fragment />
+          }
             {
               this.props.selectedTrack != "" ?
+              <Fragment>
               <iframe src={this.props.selectedTrack} style={{ marginTop: '30vh' }} width="250" height="500" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </Fragment>
               :
               <Fragment />
             }
