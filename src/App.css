@@ -30,7 +30,13 @@
 
 div, button {
   margin: .6vh;
-  padding: .7vh;
+  padding: .4vh;
+}
+
+.ui.grid>.row>.column {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+
 }
 
 hr {
@@ -67,12 +73,13 @@ body {
   justify-content: center !important;
   padding: .2vh !important;
   width: 100vh !important;
-  margin: 5vh !important;
+  /* margin: 5vh !important; */
   margin-bottom: 1.5vh !important;
   border-radius: 0px !important;
   min-height: 53vh !important;
   max-height: 53vh !important;
-  max-width: 31vh !important;
+  /* max-width: 31vh !important; */
+  /* min-width: 29vh !important; */
   box-shadow: 1px 1px 14px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important;
   letter-spacing: .05rem;
   font-family: Lucida Grande;
