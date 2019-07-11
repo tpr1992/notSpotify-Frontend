@@ -14,8 +14,7 @@ class MainContainer extends React.Component {
     alignment: 'centered'
   }
 
-  render () {
-    console.log(this.props.spacing);
+  renderSearch = () => {
     return (
       <Grid centered style={{ marginLeft: this.props.spacing }}>
         <Grid.Row columns={ this.props.spacing === '0rem' ? 6 : 5 } >
@@ -47,6 +46,16 @@ class MainContainer extends React.Component {
           }
         </Grid.Row>
       </Grid>
+    )
+  }
+
+  render () {
+    console.log(this.props.spacing);
+    return (
+      this.props.noResults === true ?
+      <h1>Sorry, no results found.</h1>
+      :
+      this.renderSearch()
     )
   }
 }

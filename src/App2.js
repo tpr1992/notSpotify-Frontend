@@ -29,6 +29,7 @@ class App2 extends Component {
     loggedIn: null,
     showUser: false,
     currentUser: '',
+    noResults: false,
     showSidebar: true,
     userPlaylists: [],
     searchResults: [],
@@ -196,7 +197,8 @@ class App2 extends Component {
       loading: true,
       searchResults: [],
       artistSearchResults: [],
-      userPlaylists: []
+      userPlaylists: [],
+      noResults: false
     })
     fetch('http://localhost:3001/api/v2/search_tracks', {
       method: 'POST',
@@ -210,22 +212,36 @@ class App2 extends Component {
     })
     .then(res => res.json())
     .then(results => {
+      // debugger
+      if (results.length === 0) {
+        this.setState({
+          loading: false,
+          noResults: true
+        })
+      }
+      else {
       results.forEach(result => {
         if (result.type === 'artist' && result.images.length !== 0) {
           this.setState({
+            noResults: false,
             artistSearchResults: [...this.state.artistSearchResults, result]
           }, () => this.setState({
-            loading: false
+            loading: false,
+            userSearched: true
           }))
         }
         else if (result.type === 'track' && result.album.images.length !== 0) {
           this.setState({
+            noResult: false,
             searchResults: [...this.state.searchResults, result]
           }, () => this.setState({
-            loading: false
+            loading: false,
+            userSearched: true
           }))
         }
       })
+    }
+    // }
     })
   }
 
@@ -278,7 +294,7 @@ class App2 extends Component {
           :
           null
         }
-        <MainContainer goToArtistPage={this.goToArtistPage} spacing={this.state.leftSpacing} windowWidth={this.state.windowWidth} windowAlignment={this.state.windowAlignment} showSidebar={this.state.showSidebar} userClickedOnTrack={this.state.userClickedOnTrack} userPlaylists={this.state.userPlaylists} selectTrack={this.selectTrack} showFeaturedPlaylists={this.state.showFeaturedPlaylists} featuredPlaylists={this.state.featuredPlaylists} artistSearchResults={this.state.artistSearchResults} searchResults={this.state.searchResults} />
+        <MainContainer loading={this.state.loading} noResults={this.state.noResults} goToArtistPage={this.goToArtistPage} spacing={this.state.leftSpacing} windowWidth={this.state.windowWidth} windowAlignment={this.state.windowAlignment} showSidebar={this.state.showSidebar} userClickedOnTrack={this.state.userClickedOnTrack} userPlaylists={this.state.userPlaylists} selectTrack={this.selectTrack} showFeaturedPlaylists={this.state.showFeaturedPlaylists} featuredPlaylists={this.state.featuredPlaylists} artistSearchResults={this.state.artistSearchResults} searchResults={this.state.searchResults} />
         {
           this.state.showSidebar ?
           <SidePlaybackBar currentUser={this.state.currentUser[0]} showSidebar={this.showSidebar} handleLoader={this.handleLoader} selectedTrack={this.state.selectedTrack} nowPlayingImage={this.state.track.image} nowPlayingArtist={this.state.track.artist} nowPlayingName={this.state.track.name} trackPlaying={this.state.trackPlaying} />
