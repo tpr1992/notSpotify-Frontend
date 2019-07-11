@@ -11,10 +11,10 @@ const ArtistSearchResults = (props) => {
         props.artistSearchResults[0].images.length > 0 ?
 
         <div class='ui card' onClick={() => props.selectTrack(props.result.external_urls.spotify)} style={{ backgroundColor: '#1d1d1e', color: '#fff', textAlign: 'center', minHeight: '62rvh' }}>
-          <div class="image" style={{margin: '5%'}}>
+          <div class="image" style={{ margin: '5%' }}>
             {
               props.showSidebar && props.userClickedOnTrack > 0 ?
-              <img src={props.result.images[0].url || props.result.images[1].url} style={{ minHeight: '20vh', maxHeight: '22vh', height: '20vh', width: '20vh', borderRadius: '100px' }} />
+              <img src={props.result.images[0].url || props.result.images[1].url} style={{ minWidth: '24vh', minHeight: '24vh', maxHeight: '24vh', width: '20vh', display: 'initial', borderRadius: '75vh' }} />
               :
               <img src={props.result.images[0].url || props.result.images[1].url} style={{ minWidth: '26vh', minHeight: '26vh', maxHeight: '26vh', borderRadius: '75vh'  }} />
             }

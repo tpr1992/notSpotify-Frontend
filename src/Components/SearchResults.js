@@ -7,7 +7,7 @@ const searchResults = (props) => {
   return (
     <Fragment>
       {
-        props.result.album.images.length !== 0 ?
+        props.result.album.images.length !== 0 || props.result.album.images === undefined ?
         <div class="ui card" onClick={() => props.selectTrack(props.result.external_urls.spotify)} style={{backgroundColor: '#1d1d1e', color: '#fff', textAlign: 'center', minHeight: '60rvh' }}>
           <div class="image"><img src={props.result.album.images[0].url} /></div>
           <div class="content">

@@ -35,8 +35,6 @@ class App2 extends Component {
     featuredPlaylists: [],
     artistSearchResults: [],
     nowPlayingChecked: false,
-    //  Counter for checking if a track has been played during a session yet. Use for sidebar logic.
-    userClickedOnTrack: 0,
     showFeaturedPlaylists: false,
     // ======================
     //  Handle scaling for popout media player
@@ -50,13 +48,14 @@ class App2 extends Component {
     track: '',
     selectedTrack: '',
     trackPlaying: false,
+    userClickedOnTrack: 0,
     initialSongPlayed: false
   }
 
   componentDidMount() {
-    // setTimeout(this.handleLoader, 1500)
     this.getPlaylists()
     this.resizeWindow()
+    this.hitOAuth()
   }
 
   //  Invoke whenever a fetch completes
@@ -91,6 +90,14 @@ class App2 extends Component {
     this.selectTrack(artistUri)
   }
 
+  hitOAuth = () => {
+    // fetch('http://localhost:3001/api/v2/oauth')
+    // .then(res => res.json())
+    // .then(data => {
+    //   debugger
+    // })
+  }
+
   //  Run on componentDidMount, gets user's playlists
   getPlaylists = () => {
     fetch('http://localhost:3001/api/v2/get_playlists')
@@ -116,7 +123,6 @@ class App2 extends Component {
         showFeaturedPlaylists: !this.state.showFeaturedPlaylists
       }, () => this.handleLoader())
     })
-
   }
 
   //  Setting currently playing in playback bar and in custom controls
@@ -130,8 +136,7 @@ class App2 extends Component {
     })
   }
 
-  //  Grab link from track info in api, change embeded player source to selected track
-  //  This runs when a track or playlist are clicked
+  //  Grab link from track info in api, change embeded player source to selected track. Function runs wheevern a track or playlist are clicked
   selectTrack = (link) => {
     this.setState({
       selectedTrack: link.split('com').join('com/embed'),
@@ -213,7 +218,7 @@ class App2 extends Component {
             loading: false
           }))
         }
-        else {
+        else if (result.type === 'track' && result.album.images.length !== 0) {
           this.setState({
             searchResults: [...this.state.searchResults, result]
           }, () => this.setState({
@@ -232,11 +237,11 @@ class App2 extends Component {
     return (
       <div className='App' style={{ textAlign: 'center', marginLeft: this.state.spaceLeft }}>
         <div class='ui sticky'>
-        <div class='main-title' style={{ marginLeft: this.state.mainTitleMargin }}>
-          <span id='logo-header'>
-            <h1 id='header-text' onClick={this.reloadPage}>notSpotify();<i class='spotify icon'/></h1>
-          </span>
-        </div>
+          <div class='main-title' style={{ marginLeft: this.state.mainTitleMargin }}>
+            <span id='logo-header'>
+              <h1 id='header-text' onClick={this.reloadPage}>notSpotify();<i class='spotify icon'/></h1>
+            </span>
+          </div>
         </div>
         <SpotifyAuth setUser={this.setUser} />
         {
@@ -248,21 +253,17 @@ class App2 extends Component {
         <br />
         <hr style={{marginLeft: this.state.hrMargin, marginRight: '10%'}} />
 
-        <div id='custom-search-box' style={{marginLeft: this.state.mainTitleMargin}}>
-          <div class='box box2'>
+        <div id='custom-search-box' style={{ filter: 'drop-shadow(0px 11px 35px #d4d4d5)', marginLeft: this.state.mainTitleMargin }}>
+          <div class='box box2' style={{ filter: 'drop-shadow(0px 11px 35px #d4d4d5)' }}>
             <div class='evenboxinner'>
               <form onSubmit={this.searchTracks} >
                 <Input icon='search' type='text' id='custom-search' value={this.state.query} placeholder='Search...' onChange={this.captureSearch} style={{ zIndex: '1', cursor: 'pointer' }} />
               </form>
             </div>
           </div>
-          <Input type='text' placeholder='Search...' value={this.state.query} onChange={this.captureSearch} style={{ filter: 'drop-shadow(0px 11px 35px #d4d4d5)', border: 'none'
- }} />
-
-
           <Button color='green' onClick={this.searchTracks}>Submit</Button>
           <Button color='green' onClick={this.getPlaylists}>My playlists</Button>
-          <Button color='green' onClick={this.browseFeaturedPlaylists}>Featured playlists</Button>
+          <Button color='green' onClick={this.browseFeaturedPlaylists} style={{ display: 'none' }}>Featured playlists</Button>
         </div>
         <hr style={{marginTop: '1rem', marginLeft: this.state.hrMargin, marginRight: '10%'}} />
         {

@@ -14,7 +14,7 @@ class SidePlaybackBar extends React.Component {
           {
             this.props.selectedTrack != "" ?
             <Fragment>
-              <iframe src={this.props.selectedTrack} style={{ marginTop: '30vh' }} width="250" height="500" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+              <iframe src={this.props.selectedTrack} style={{ boxShadow: '0px 2px 35px 1px #d4d4d5', marginTop: '15vh' }} width="250" height="800" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
             </Fragment>
             :
             <Fragment />
