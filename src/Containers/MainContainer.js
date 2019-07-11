@@ -53,7 +53,7 @@ class MainContainer extends React.Component {
     console.log(this.props.spacing);
     return (
       this.props.noResults === true ?
-      <h1>Sorry, no results found.</h1>
+      <h1 style={{ color: 'white', opacity: '.85', filter: 'drop-shadow(0px 11px 35px #d4d4d5)', fontSize: '2em', textShadow: '2px 2px 0 #000' }}> Sorry, no results found. </h1>
       :
       this.renderSearch()
     )

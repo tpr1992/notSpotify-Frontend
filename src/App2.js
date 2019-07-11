@@ -220,28 +220,28 @@ class App2 extends Component {
         })
       }
       else {
-      results.forEach(result => {
-        if (result.type === 'artist' && result.images.length !== 0) {
-          this.setState({
-            noResults: false,
-            artistSearchResults: [...this.state.artistSearchResults, result]
-          }, () => this.setState({
-            loading: false,
-            userSearched: true
-          }))
-        }
-        else if (result.type === 'track' && result.album.images.length !== 0) {
-          this.setState({
-            noResult: false,
-            searchResults: [...this.state.searchResults, result]
-          }, () => this.setState({
-            loading: false,
-            userSearched: true
-          }))
-        }
-      })
-    }
-    // }
+        results.forEach(result => {
+          if (result.type === 'artist' && result.images.length !== 0) {
+            this.setState({
+              noResults: false,
+              artistSearchResults: [...this.state.artistSearchResults, result]
+            }, () => this.setState({
+              loading: false,
+              userSearched: true
+            }))
+          }
+          else if (result.type === 'track' && result.album.images.length !== 0) {
+            this.setState({
+              noResult: false,
+              searchResults: [...this.state.searchResults, result]
+            }, () => this.setState({
+              loading: false,
+              userSearched: true
+            }))
+          }
+        })
+      }
+      // }
     })
   }
 
@@ -269,11 +269,11 @@ class App2 extends Component {
         <br />
         <hr style={{marginLeft: this.state.hrMargin, marginRight: '10%'}} />
 
-        <div id='custom-search-box' style={{ filter: 'drop-shadow(0px 11px 35px #d4d4d5)', marginLeft: this.state.mainTitleMargin }}>
+        <div id='custom-search-box' style={{ filter: 'drop-shadow(0px 11px 32px #d4d4d5)', marginLeft: this.state.mainTitleMargin }}>
           <div class='box box2' style={{ filter: 'drop-shadow(0px 11px 35px #d4d4d5)' }}>
             <div class='evenboxinner'>
               <form onSubmit={this.searchTracks} >
-                <Input icon='search' type='text' id='custom-search' value={this.state.query} placeholder='Search...' onChange={this.captureSearch} style={{ zIndex: '1', cursor: 'pointer' }} />
+                <Input icon='inverted search' type='text' id='custom-search' value={this.state.query} placeholder='Search...' onChange={this.captureSearch} style={{ zIndex: '1', cursor: 'pointer' }} />
               </form>
             </div>
           </div>
