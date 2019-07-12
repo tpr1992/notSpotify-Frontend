@@ -10,12 +10,6 @@ class PlaybackBar extends React.Component {
     showBottom: false
   }
 
-  // showBottom = () => {
-  //   this.setState({
-  //     showBottom: !this.state.showBottom
-  //   })
-  // }
-
   render () {
     return (
       <div class="playback-bar">
@@ -42,31 +36,3 @@ class PlaybackBar extends React.Component {
 }
 
 export default PlaybackBar;
-
-
-// return (
-//   <div class="playback-bar">
-//     <div class="ui left fixed inverted menu">
-//       {
-//         this.props.trackPlaying ?
-//         <Fragment>
-//           <div class="item">
-//             <img src={this.props.nowPlayingImage} />
-//           </div>
-//           <a class="item">{this.props.nowPlayingArtist}</a>
-//           <a class="item">{this.props.nowPlayingName}</a>
-//         </Fragment>
-//         :
-//         <Fragment />
-//       }
-//       <div class='right item' style={{display: 'flex'}}>
-//         {
-//           this.props.selectedTrack != "" ?
-//           <iframe src={this.props.selectedTrack} width="500" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-//           :
-//           <Fragment />
-//         }
-//       </div>
-//     </div>
-//   </div>
-// )

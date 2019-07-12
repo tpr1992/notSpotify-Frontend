@@ -212,7 +212,6 @@ class App2 extends Component {
     })
     .then(res => res.json())
     .then(results => {
-      // debugger
       if (results.length === 0) {
         this.setState({
           loading: false,
@@ -267,7 +266,7 @@ class App2 extends Component {
           null
         }
         <br />
-        <hr style={{marginLeft: this.state.hrMargin, marginRight: '10%'}} />
+        <hr style={{ marginLeft: this.state.hrMargin, marginRight: '10%' }} />
 
         <div id='custom-search-box' style={{ filter: 'drop-shadow(0px 11px 32px #d4d4d5)', marginLeft: this.state.mainTitleMargin }}>
           <div class='box box2' style={{ filter: 'drop-shadow(0px 11px 35px #d4d4d5)' }}>
@@ -281,7 +280,7 @@ class App2 extends Component {
           <Button color='green' onClick={this.getPlaylists}>My playlists</Button>
           <Button color='green' onClick={this.browseFeaturedPlaylists} style={{ display: 'none' }}>Featured playlists</Button>
         </div>
-        <hr style={{marginTop: '1rem', marginLeft: this.state.hrMargin, marginRight: '10%'}} />
+        <hr style={{ marginTop: '1rem', marginLeft: this.state.hrMargin, marginRight: '10%' }} />
         {
           this.state.loading ?
           <div style={{ marginTop: 40, marginRight: 10, padding: 15, filter: 'drop-shadow(0px 11px 35px #d4d4d5)' }} class="ui active inline loader"></div>

@@ -1,4 +1,3 @@
-
 .App {
 }
 
@@ -73,7 +72,6 @@ body {
   justify-content: center !important;
   padding: .2vh !important;
   width: 100vh !important;
-  /* margin: 5vh !important; */
   margin-bottom: 1.5vh !important;
   border-radius: 0px !important;
   min-height: 53vh !important;
@@ -171,13 +169,13 @@ body {
   font-size: 1.15em;
   /* background: none; */
   display: flex;
-  color: black;
+  color: #333333;
   justify-content: space-between;
   /* font-family: Lato; */
   font-weight: 300;
   styles: none;
   outline: none;
-  /* opacity: .95; */
+  opacity: .95;
 }
 
 .ui.icon.input>i.icon {
@@ -198,6 +196,5 @@ iframe[Attributes Style] {
 .main-title {
   padding-bottom: 0px;
 }
-
 
 /* =============================================================== */

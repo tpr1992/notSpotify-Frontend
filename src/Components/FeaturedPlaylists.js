@@ -3,9 +3,6 @@ import { Fragment } from 'react';
 import { Grid, Label } from 'semantic-ui-react';
 // ======================================
 
-
-
-
 class FeaturedPlaylists extends React.Component {
 
 
@@ -14,7 +11,6 @@ class FeaturedPlaylists extends React.Component {
     return (
       <Fragment>
         
-
       </Fragment>
     )
   }
