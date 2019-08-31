@@ -21,7 +21,7 @@ class MainContainer extends React.Component {
           {
             this.props.artistSearchResults.length > 0 ?
             this.props.artistSearchResults.map(result => {
-              return <Grid.Column> {<ArtistSearchResults artistSearchResults={this.props.artistSearchResults} selectTrack={this.props.selectTrack} result={result} key={result.id} showSidebar={this.props.showSidebar} userClickedOnTrack={this.props.userClickedOnTrack} />}</Grid.Column>
+              return <Grid.Column> { <ArtistSearchResults artistSearchResults={ this.props.artistSearchResults } selectTrack={ this.props.selectTrack } result={ result } key={ result.id } showSidebar={ this.props.showSidebar } userClickedOnTrack={this.props.userClickedOnTrack} /> }</Grid.Column>
             })
             :
             <Fragment />
@@ -29,17 +29,17 @@ class MainContainer extends React.Component {
           {
             this.props.searchResults.length > 0 ?
             this.props.searchResults.map(result => {
-              return <Grid.Column> {<SearchResults goToArtistPage={this.props.goToArtistPage} selectTrack={this.props.selectTrack} result={result} key={result.id} />} </Grid.Column>
+              return <Grid.Column> { <SearchResults goToArtistPage={ this.props.goToArtistPage } selectTrack={ this.props.selectTrack } result={ result } key={ result.id } /> } </Grid.Column>
             })
             :
             this.props.userPlaylists.map(playlist => {
-              return <Grid.Column> {<UserPlaylists selectTrack={this.props.selectTrack} playlist={playlist} key={playlist.id} />} </Grid.Column>
+              return <Grid.Column> { <UserPlaylists selectTrack={ this.props.selectTrack } playlist={ playlist } key={ playlist.id } /> } </Grid.Column>
             })
           }
           {
             this.props.showFeaturedPlaylists === true ?
             this.props.featuredPlaylists.map(playlist => {
-              return <Grid.Column> {<FeaturedPlaylists selectTrack={this.props.selectTrack} playlist={playlist} key={playlist.id} />} </Grid.Column>
+              return <Grid.Column> { <FeaturedPlaylists selectTrack={ this.props.selectTrack } playlist={ playlist } key={ playlist.id } /> } </Grid.Column>
             })
             :
             null
@@ -50,13 +50,14 @@ class MainContainer extends React.Component {
   }
 
   render () {
-    console.log(this.props.spacing);
     return (
+      
       this.props.noResults === true ?
       <h1 style={{ color: 'white', opacity: '.85', filter: 'drop-shadow(0px 11px 35px #d4d4d5)', fontSize: '2em', textShadow: '2px 2px 0 #000' }}> Sorry, no results found. </h1>
       :
       this.renderSearch()
     )
+
   }
 }
 

@@ -35,7 +35,6 @@ div, button {
 .ui.grid>.row>.column {
   padding-left: 0 !important;
   padding-right: 0 !important;
-
 }
 
 hr {
@@ -76,8 +75,6 @@ body {
   border-radius: 0px !important;
   min-height: 53vh !important;
   max-height: 53vh !important;
-  /* max-width: 31vh !important; */
-  /* min-width: 29vh !important; */
   box-shadow: 1px 1px 14px 0 #d4d4d5, 0 0 0 1px #d4d4d5 !important;
   letter-spacing: .05rem;
   font-family: Lucida Grande;
@@ -137,7 +134,6 @@ body {
   margin:25px;
   width:150px;
   height:50px;
-  /* border: solid black; */
   border-color: white;
   float:center;
 }
@@ -146,10 +142,8 @@ body {
   width:300px;
   border-width: .5px .8px 1.8px 2px;
   border-radius:4% 95% 4% 95%/95% 4% 92% 5%;
-  /* transform: rotate(-2deg); */
 }
 .evenboxinner{
-  /* transform: rotate(1deg); */
   margin:1px;
   margin-bottom: 1px;
   padding:0.2 10px;
@@ -158,24 +152,6 @@ body {
   letter-spacing: .15em;
   font-weight: 200;
   float:centered;
-}
-
-#custom-search {
-  border: none;
-  width: 276px;
-  height: 50px;
-  letter-spacing: .09em;
-  padding-left: 3vh;
-  font-size: 1.15em;
-  /* background: none; */
-  display: flex;
-  color: #333333;
-  justify-content: space-between;
-  /* font-family: Lato; */
-  font-weight: 300;
-  styles: none;
-  outline: none;
-  opacity: .95;
 }
 
 .ui.icon.input>i.icon {
@@ -196,5 +172,6 @@ iframe[Attributes Style] {
 .main-title {
   padding-bottom: 0px;
 }
+
 
 /* =============================================================== */
