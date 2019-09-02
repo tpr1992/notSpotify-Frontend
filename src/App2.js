@@ -1,5 +1,5 @@
 import './App.css';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Spotify from 'spotify-web-api-js';
 // =====================================
 import UserCard from './Components/UserCard';
@@ -35,6 +35,7 @@ class App2 extends Component {
     searchResults: [],
     featuredPlaylists: [],
     artistSearchResults: [],
+    colorTheme: 'Light Mode',
     nowPlayingChecked: false,
     showFeaturedPlaylists: false,
     // ======================
@@ -247,6 +248,24 @@ class App2 extends Component {
     })
   }
 
+  switchTheme = (event) => {
+    let buttonText = event.target.innerText
+    if (this.state.colorTheme === 'Dark Mode') {
+      document.querySelector('body').style = 'background: #424242 !important'
+      document.querySelector('#header-text').style.opacity = '1'
+      this.setState({
+        colorTheme: 'Light Mode'
+      })
+    }
+    else if (this.state.colorTheme === 'Light Mode') {
+      document.querySelector('body').style = 'background: #616161 !important'
+      document.querySelector('#header-text').style.opacity = '.85'
+      this.setState({
+        colorTheme: 'Dark Mode'
+      })
+    }
+  }
+
 
   render() {
     return (
@@ -259,6 +278,8 @@ class App2 extends Component {
             </span>
           </div>
         </div>
+
+        <Button color='inverted small' style={{ position: 'relative', top: '-20vh', left: '37vw' }} onClick={ this.switchTheme }>{this.state.colorTheme}</Button>
 
         <SpotifyAuth setUser={ this.setUser } />
 
@@ -280,10 +301,20 @@ class App2 extends Component {
               </form>
             </div>
           </div>
-
-          <Button color='green' onClick={ this.searchTracks }>Submit</Button>
-          <Button color='green' onClick={ this.getPlaylists }>My playlists</Button>
-          <Button color='green' onClick={ this.browseFeaturedPlaylists } style={{ display: 'none' }}>Featured playlists</Button>
+          {
+            this.state.colorTheme === 'Dark Mode' ?
+            <Fragment>
+              <Button color='green' onClick={ this.searchTracks }>Submit</Button>
+              <Button color='green' onClick={ this.getPlaylists }>My playlists</Button>
+              <Button color='green' onClick={ this.browseFeaturedPlaylists } style={{ display: 'none' }}>Featured playlists</Button>
+            </Fragment>
+            :
+            <Fragment>
+              <Button color='inverted green' onClick={ this.searchTracks }>Submit</Button>
+              <Button color='inverted green' onClick={ this.getPlaylists }>My playlists</Button>
+              <Button color='inverted green' onClick={ this.browseFeaturedPlaylists } style={{ display: 'none' }}>Featured playlists</Button>
+            </Fragment>
+          }
 
         </div>
 
@@ -308,7 +339,7 @@ class App2 extends Component {
         <SidePlaybackBar displayStyle={ this.state.displayStyle } currentUser={ this.state.currentUser[0] } showSidebar={ this.showSidebar } handleLoader={ this.handleLoader } selectedTrack={ this.state.selectedTrack } trackPlaying={ this.state.trackPlaying } />
 
       </div>
-      
+
     )
   }
 }
