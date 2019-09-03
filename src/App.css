@@ -1,4 +1,5 @@
-.App {
+#root {
+  background: #424242 !important;
 }
 
 .App-header {
@@ -40,10 +41,6 @@ div, button {
 hr {
   margin-top: -5vh;
   margin-bottom: 5vh;
-}
-
-body {
-  background: #424242 !important;
 }
 
 .github-icon {
@@ -88,7 +85,6 @@ body {
 #header-text {
   display: center;
   font-size: 5em;
-  color: #282c34;
   font-family: Architects Daughter;
   padding: 2vh;
   width: 100%;
@@ -100,7 +96,6 @@ body {
   1px -1px 0 #000,
   -1px 1px 0 #000,
   1px 1px 0 #000;
-  opacity: .85;
   filter: drop-shadow(0px 11px 35px #d4d4d5);
 }
 
@@ -172,6 +167,3 @@ iframe[Attributes Style] {
 .main-title {
   padding-bottom: 0px;
 }
-
-
-/* =============================================================== */

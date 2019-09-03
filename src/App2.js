@@ -13,7 +13,7 @@ import NowPlayingSwitch from './Components/NowPlayingSwitch';
 import FeaturedPlaylists from './Components/FeaturedPlaylists';
 import SidePlaybackBarArrow from './Components/SidePlaybackBarArrow';
 // ======================================
-import { Grid, Button, Form, Input, Segment, Menu } from 'semantic-ui-react';
+import { Button, Input } from 'semantic-ui-react';
 // ======================================
 
 //  Might delete, this is using older API
@@ -56,7 +56,7 @@ class App2 extends Component {
   }
 
   componentDidMount() {
-    this.hitOAuth()
+    // this.setUser()
     this.getPlaylists()
     this.resizeWindow()
   }
@@ -91,14 +91,6 @@ class App2 extends Component {
   //  Opens top tracks of selected artist via artistSearch
   goToArtistPage = (artistUri) => {
     this.selectTrack(artistUri)
-  }
-
-  hitOAuth = () => {
-    // fetch('http://localhost:3001/api/v2/oauth')
-    // .then(res => res.json())
-    // .then(data => {
-    //   debugger
-    // })
   }
 
   //  Run on componentDidMount, gets user's playlists
@@ -251,15 +243,15 @@ class App2 extends Component {
   switchTheme = (event) => {
     let buttonText = event.target.innerText
     if (this.state.colorTheme === 'Dark Mode') {
-      document.querySelector('body').style = 'background: #424242 !important'
-      document.querySelector('#header-text').style.opacity = '1'
+      document.querySelector('#root').style = 'background: #424242 !important'
+      document.querySelector('#header-text').style.filter = 'drop-shadow(0px 0px 15px #d4d4d5)'
       this.setState({
         colorTheme: 'Light Mode'
       })
     }
     else if (this.state.colorTheme === 'Light Mode') {
-      document.querySelector('body').style = 'background: #616161 !important'
-      document.querySelector('#header-text').style.opacity = '.85'
+      document.querySelector('#root').style = 'background: #bdbdbd !important'
+      document.querySelector('#header-text').style.filter = 'drop-shadow(0px 2px 1px #020202)'
       this.setState({
         colorTheme: 'Dark Mode'
       })
@@ -301,6 +293,7 @@ class App2 extends Component {
               </form>
             </div>
           </div>
+
           {
             this.state.colorTheme === 'Dark Mode' ?
             <Fragment>
