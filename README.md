@@ -1,5 +1,8 @@
 ### notSpotify();
 
+![notSpotify with player open](https://i.imgur.com/6fZpj3l.png)
+
+
 To start, please run `npm start` on port 3000.
 
 - This is my final project for Flatiron School's immersive software engineering course. It is intended to be my own personal take on a Spotify style music streaming app. The frontend is built entirely in React.js, is styled with SemanticUI and custom CSS.
