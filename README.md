@@ -9,7 +9,7 @@ To start, please run `npm start` on port 3000.
 
 - Authorization is done in the backend through the Spotify Web API using OAuth. This allows users access to personal information and specific permissions in the form of scope are defined to define what my app has permission to use.
 
-- With the in-browser Spotify media player, users can live stream any and all songs available on Spotify. I am also currently working on building my own custom media player, but it is too soon to tell if I will be adding this to the final project.
+- With the in-browser Spotify media player, users can live stream any and all songs available on Spotify. The player is now hideable as well and can play in the background if the user chooses to hide it.
 
 - Users can search through their personal playlists, as well as artists and tracks.
 
