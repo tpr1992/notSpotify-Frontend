@@ -7,7 +7,7 @@ To start, please run `npm start` on port 3000.
 
 - This is my final project for Flatiron School's immersive software engineering course. It is intended to be my own personal take on a Spotify style music streaming app. The frontend is built entirely in React.js, is styled with SemanticUI and custom CSS.
 
-- Authorization is done in the backend through the Spotify Web API using OAuth. This allows users access to personal information and specific permissions in the form of scope are defined to define what my app has permission to use.
+- Authorization is done in the backend through the Spotify Web API using OAuth. This allows users access to personal information and specific permissions in the form of scope are defined as to what the app has permission to use.
 
 - With the in-browser Spotify media player, users can live stream any and all songs available on Spotify. The player is now hideable as well and can play in the background if the user chooses to hide it.
 
