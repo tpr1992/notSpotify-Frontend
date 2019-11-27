@@ -1,6 +1,6 @@
 import './App.css';
-import React, { Component, Fragment } from 'react';
 import Spotify from 'spotify-web-api-js';
+import React, { Component, Fragment } from 'react';
 // =====================================
 import UserCard from './Components/UserCard';
 import PlaybackBar from './Components/PlaybackBar';
@@ -103,7 +103,7 @@ class App2 extends Component {
         searchResults: [],
         userPlaylists: data,
         artistSearchResults: []
-      }, () => this.handleLoader())
+      }, () => this.handleLoader());
     })
   }
 
@@ -116,7 +116,7 @@ class App2 extends Component {
         searchResults: [],
         featuredPlaylists: data,
         showFeaturedPlaylists: !this.state.showFeaturedPlaylists
-      }, () => this.handleLoader())
+      }, () => this.handleLoader());
     })
   }
 
@@ -141,8 +141,8 @@ class App2 extends Component {
       windowAlignment: 'right',
       showSidebar: !this.state.showSidebar,
       selectedTrack: link.split('com').join('com/embed'),
-      userClickedOnTrack: this.state.userClickedOnTrack + 1
-    }, () => this.handleSidebar())
+      userClickedOnTrack: this.state.userClickedOnTrack + 1;
+    }, () => this.handleSidebar());
   }
 
   //  Make sure user cannot hide the sidebar before the player is rendered initially
@@ -154,8 +154,8 @@ class App2 extends Component {
         displayStyle: this.state.showSidebar === true ? 'none' : null,
         leftSpacing: this.state.showSidebar === true ? '0rem' : '14rem',
         mainTitleMargin: this.state.showSidebar === true ? '0%' : '20%',
-        windowAlignment: this.state.showSidebar === true ? 'center' : 'right'
-      })
+        windowAlignment: this.state.showSidebar === true ? 'center' : 'right';
+      });
     }
   }
 
@@ -170,7 +170,7 @@ class App2 extends Component {
         mainTitleMargin: '20%',
         windowAlignment: 'right',
         windowWidth: 'width: 75%'
-      })
+      });
     }
   }
 
@@ -184,7 +184,7 @@ class App2 extends Component {
       mainTitleMargin: '0%',
       windowWidth: newState,
       windowAlignment: 'center'
-    })
+    });
   }
 
   //  Searching spotify db for tracks and artists, then sort into respective states
@@ -196,7 +196,7 @@ class App2 extends Component {
       searchResults: [],
       userPlaylists: [],
       artistSearchResults: []
-    })
+    });
     fetch('http://localhost:3001/api/v2/search_tracks', {
       method: 'POST',
       headers: {
@@ -266,12 +266,12 @@ class App2 extends Component {
         <div class='ui sticky'>
           <div class='main-title' style={{ marginLeft: this.state.mainTitleMargin }}>
             <span id='logo-header'>
-              <h1 id='header-text'>notSpotify();<i class='spotify icon'/></h1>
+              <h1 id='header-text'>notSpotify();<i class='spotify icon' /></h1>
             </span>
           </div>
         </div>
 
-        <Button color='inverted small' style={{ position: 'relative', top: '-20vh', left: '37vw' }} onClick={ this.switchTheme }>{this.state.colorTheme}</Button>
+        <Button color='inverted small' style={{ position: 'relative', top: '-20vh', left: '37vw' }} onClick={ this.switchTheme }> { this.state.colorTheme } </Button>
 
         <SpotifyAuth setUser={ this.setUser } />
 
